@@ -2,21 +2,27 @@ package com.pms.Action;
 
 import java.util.Date;
 import java.util.List;
-
 import javafx.scene.control.DatePicker;
 import jdk.nashorn.internal.parser.DateParser;
-
 import com.opensymphony.xwork2.ActionSupport;
+import com.pms.DAO.UserDAO;
+import com.pms.model.Login;
 import com.pms.model.User;
 import com.pms.util.DB;
 
 
 public class UserAction extends ActionSupport{
-	
+	/*
+	 * Action class for user
+	 */
+	//declaring variables
 	private User user;
 	private List userList;
+	private Login login;
 	
-	
+	/*
+	 * Getters and Setters for private attributes
+	 */
 	public User getUser() {
 		return user;
 	}
@@ -30,8 +36,10 @@ public class UserAction extends ActionSupport{
 		this.userList = userList;
 	}
 	
-	
-	
+	/*
+	 * method declaration
+	 */
+	//add a new user
 	public String add(){
 		Date dNow = new Date();
 		user.setUserDateOfRegister(dNow);
