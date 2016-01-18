@@ -1,3 +1,4 @@
+<%@page import="com.pms.model.Login"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="s" uri="/struts-tags"%>
@@ -13,7 +14,7 @@
 			<div class="col-sm-3"></div>
 			<div class="col-sm-6">
 				<img alt="logo" src="image/sliiit_logo.jpg">
-				<s:form cssClass="form-horizontal" action="" method="post">
+				<s:form cssClass="form-horizontal" action="login" method="post">
 					<div class="panel panel-default">
   						<div class="panel-heading clearfix">
     						<h3 class="panel-title pull-left">Login To Module</h3>
@@ -28,13 +29,13 @@
 	    					<div class="form-group">
 	        					<label class="col-xs-3 control-label">User Name</label>
 	        					<div class="col-xs-9">
-	          						<input type="text" Class="form-control" name="" placeholder="your Name" required>
+	          						<input type="text" Class="form-control" name="login.userName" placeholder="your Name" required>
 	        					</div>
 	      					</div>
 	      					<div class="form-group">
 	        					<label class="col-xs-3 control-label">Password</label>
 	        					<div class="col-xs-9">
-	          						<input type="password" Class="form-control" name="" placeholder="your Password" required>
+	          						<input type="password" Class="form-control" name="login.userPassword" placeholder="your Password" required>
 	        					</div>
 	      					</div>
 	  					</div>
