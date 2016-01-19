@@ -12,7 +12,6 @@ import com.pms.model.Login;
 import com.pms.model.User;
 public class UserDAO {
 	public String userAuthonticate(Login login) {
-		
 		Session session = DbConnectionManager.getSessionFactory().openSession();
 		session.beginTransaction();
 		String password = (String)session.createCriteria(User.class)

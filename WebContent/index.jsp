@@ -5,7 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
-		<jsp:include page="cssAndJsCalling.jsp" />
+		<jsp:include page="includes/cssAndJsCalling.jsp" />
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Login</title>
 	</head>
@@ -46,4 +46,9 @@
 			<div class="col-sm-3"></div>
 		</div>
 	</body>
+	<s:if test="loginState.equal(errorLogin)">
+	<script type="text/javascript">
+	alertify.error("Not inserted data properly, check it now");
+	</script>
+	</s:if>
 </html>
