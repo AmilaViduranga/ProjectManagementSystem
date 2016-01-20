@@ -10,12 +10,20 @@
                 <a href="GroupList.jsp">
                     <h5>
                         <i class="fa fa-users" style="margin-left: 10px;"></i>
-                        Groups
+                        Student Groups
                     </h5>
                 </a>
             </li>
         </ul>   
     </div>
-    <div class="col-md-3" style="color: #ffffff">
+    <div class="col-md-3">
+    	<ul class="nav navbar-nav navbar-inverse pull-right">
+    		<li>
+    			<a href="userProfile.jsp">
+    				<i class="fa fa-user"></i>
+    				User Profile
+    			</a>
+    		</li>
+    	</ul>
     </div>
 </nav>

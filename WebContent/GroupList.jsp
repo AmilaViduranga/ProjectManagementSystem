@@ -7,12 +7,14 @@
 		<jsp:include page="includes/cssAndJsCalling.jsp"></jsp:include>
 		<jsp:include page="includes/header.jsp"></jsp:include>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>Insert title here</title>
+		<title>Groups</title>
 	</head>
 	<body style="margin-top: 80px;">
 		<div class="row">
 			<div class="col-sm-1"></div>
 			<div class="col-sm-10">
+				<i class="fa fa-4x fa-users pull-left"></i>
+				<h1>Student Groups</h1>
 				<div class="col-sm-4">
 					<div class="bootcards-list">
 					  	<div class="panel panel-default">
@@ -30,18 +32,7 @@
 						      <a class="list-group-item" href="#">
 					        	<div class="row">
 					        		<div class="col-sm-6">
-					        			<i class="fa fa-4x fa-users pull-left"></i>
-				          				<h4 class="list-group-item-heading">Group No</h4>
-							            <p class="list-group-item-text">Leader</p>
-					        		</div>
-					          	</div>
-						      </a>
-					    	</div>
-					    	<div class="list-group" id="groupList">
-						      <a class="list-group-item" href="#">
-					        	<div class="row">
-					        		<div class="col-sm-6">
-					        			<i class="fa fa-4x fa-users pull-left"></i>
+					        			<i class="fa fa-3x fa-users pull-left"></i>
 				          				<h4 class="list-group-item-heading">Group No</h4>
 							            <p class="list-group-item-text">Leader</p>
 					        		</div>
