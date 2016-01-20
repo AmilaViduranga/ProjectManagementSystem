@@ -3,8 +3,8 @@
 <%@taglib prefix="s" uri="/struts-tags"%>
 <html>
     <head>
-        <jsp:include page="cssAndJsCalling.jsp" />
-        <jsp:include page="header.jsp" />
+        <jsp:include page="includes/cssAndJsCalling.jsp" />
+        <jsp:include page="includes/header.jsp" />
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <title>Register</title>
     </head>
