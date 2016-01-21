@@ -9,6 +9,8 @@ public class DbConnectionManager {
 	
 	private DbConnectionManager() {
 		
+		
+		
 	}
 	
 	public static SessionFactory getSessionFactory() {

@@ -46,7 +46,7 @@
 			<div class="col-sm-3"></div>
 		</div>
 	</body>
-	<s:if test="loginState.equal(errorLogin)">
+	<s:if test="hasActionErrors()">
 	<script type="text/javascript">
 	alertify.error("Not inserted data properly, check it now");
 	</script>
