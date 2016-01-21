@@ -1,6 +1,7 @@
 package com.pms.model;
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "pms_user")
@@ -22,6 +24,9 @@ public class User {
 	
 	@Column(name = "password")
 	private String userPassword;
+	
+	@Transient
+	private String confirmPassword;
 	
 	@Column(name = "email")
 	private String userEmail;
@@ -41,6 +46,20 @@ public class User {
 	
 	@Column(name = "token")
 	private String userToken;
+	
+	
+	
+	
+
+	
+	
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
 
 	public String getUserType() {
 		return userType;

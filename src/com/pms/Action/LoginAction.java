@@ -9,13 +9,14 @@ public class LoginAction extends ActionSupport {
 	 * Variable diclaration 
 	 */
 	private Login login;
-	
 	/*
 	 * Getters and Setters decalartion
 	 */
+	
 	public Login getLogin() {
 		return login;
 	}
+	
 	public void setLogin(Login login) {
 		this.login = login;
 	}
@@ -32,9 +33,15 @@ public class LoginAction extends ActionSupport {
 			return "success";
 		} else {
 			login.setLoginState("errorLogin");
+			addActionError("invalid login");
 			return "fail";
 		}
 		
 	}
+	
+	
+	
+	
+	
 
 }

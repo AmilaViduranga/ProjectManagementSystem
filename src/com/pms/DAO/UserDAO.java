@@ -17,7 +17,7 @@ public class UserDAO {
 		String password = (String)session.createCriteria(User.class)
 		.add(Restrictions.eq("userIdNo", login.getUserName()))
 		.setProjection(Projections.property("userPassword"))
-		.uniqueResult();
+		.uniqueResult(); 
 		return password;
 	}
 }
