@@ -4,6 +4,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.pms.DAO.UserDAO;
 import com.pms.model.Login;
 
+
 public class LoginAction extends ActionSupport {
 	/*
 	 * Variable diclaration 
@@ -30,7 +31,8 @@ public class LoginAction extends ActionSupport {
 		String password = dao.userAuthonticate(login);
 		if (password.equals(login.getUserPassword())) {
 			login.setLoginState("logged");
-			return "success";
+			GroupRegistrationAction groupAction = new GroupRegistrationAction();
+			return groupAction.execute();
 		} else {
 			login.setLoginState("errorLogin");
 			addActionError("invalid login");

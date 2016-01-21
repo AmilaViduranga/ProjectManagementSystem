@@ -17,5 +17,8 @@
 			<result name="fail">/index.jsp</result>
 		</action>
 
+		<action name="login" class="com.pms.Action.GroupRegistrationAction">
+		    <result name="success">/GroupList.jsp</result>
+		</action>	
 	</package>
 </struts>

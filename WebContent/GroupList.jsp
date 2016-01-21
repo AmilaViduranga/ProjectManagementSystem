@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@taglib prefix="s" uri="/struts-tags"%>
+<%@taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -29,15 +29,17 @@
                              </div>
 						    </div>
 					    	<div class="list-group" id="groupList">
+					    	<s:iterator value="groups" var="member">
 						      <a class="list-group-item" href="#">
 					        	<div class="row">
 					        		<div class="col-sm-6">
 					        			<i class="fa fa-3x fa-users pull-left"></i>
-				          				<h4 class="list-group-item-heading">Group No</h4>
-							            <p class="list-group-item-text">Leader</p>
+				          				<h4 class="list-group-item-heading"><s:property value="groupId"/></h4>
+							            <p class="list-group-item-text"><s:property value="memberName"/></p>
 					        		</div>
 					          	</div>
 						      </a>
+						     </s:iterator>
 					    	</div>
 					  	</div>
 					</div>
