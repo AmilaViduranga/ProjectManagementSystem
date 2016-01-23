@@ -3,7 +3,6 @@
 <struts>
 	<constant name="struts.devMode" value="true" />
 	<package name="default" extends="struts-default">
-
 		<action name="list" class="com.pms.Action.UserAction">
 			<result name="success">/user_view.jsp</result>
 		</action>
@@ -12,13 +11,23 @@
 			<result name="fail">/user_add.jsp</result>
 		</action>
 
-		<action name="login" class="com.pms.Action.LoginAction" method="authonticateLogin">
+		<action name="login" class="com.pms.Action.GroupRegistrationAction">
 			<result name="success">/GroupList.jsp</result>
 			<result name="fail">/index.jsp</result>
 		</action>
+		
+		<action name="groupPage" class="com.pms.Action.GroupRegistrationAction" method="loadGroups">
+			<result name="success">/GroupList.jsp</result>
+			<result name="fail">/index.jsp</result>
+		</action>
+		
 
-		<action name="login" class="com.pms.Action.GroupRegistrationAction">
+		<action name="showGroup" class="com.pms.Action.GroupRegistrationAction">
 		    <result name="success">/GroupList.jsp</result>
+		</action> 
+		
+		<action name="getGroupIndividual" class="com.pms.Action.GroupRegistrationAction" method="getListMembers">
+			<result name="success">/templates/groupIndividual.jsp</result>    
 		</action>	
 	</package>
 </struts>

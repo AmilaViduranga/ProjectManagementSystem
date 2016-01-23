@@ -29,18 +29,22 @@
                              </div>
 						    </div>
 					    	<div class="list-group" id="groupList">
-					    	<s:iterator value="groups" var="member">
-						      <a class="list-group-item" href="#">
-					        	<div class="row">
-					        		<div class="col-sm-6">
-					        			<i class="fa fa-3x fa-users pull-left"></i>
-				          				<h4 class="list-group-item-heading"><s:property value="groupId"/></h4>
-							            <p class="list-group-item-text"><s:property value="memberName"/></p>
-					        		</div>
-					          	</div>
-						      </a>
+					    	<s:iterator value="groups" var="List">
+					    		<s:url action="getGroupIndividual" id="group" escapeAmp="false">
+    								<s:param name="groupIdName"><s:property value="groupId"/></s:param>
+    								<s:param name="groupLeader"><s:property value="memberName"/></s:param>
+								</s:url>
+						    	<a class="list-group-item" href="<s:property value="#group"/>">
+						        	<div class="row">
+						        		<div class="col-sm-6">
+						        			<i class="fa fa-3x fa-users pull-left"></i>
+					          				<h4 class="list-group-item-heading"><s:property value="groupId"/></h4>
+								            <p class="list-group-item-text"><s:property value="memberName"/></p>
+						        		</div>
+						          	</div>
+							      </a>
 						     </s:iterator>
-					    	</div>
+					  		</div>
 					  	</div>
 					</div>
 				</div>
@@ -63,12 +67,11 @@
 	<script type="text/javascript">
 	$('div#groupList a.list-group-item').click(function() {
 		var page = $(this).attr('href');
-		$('#content').load('templates/groupIndividual.jsp');
+		$('#content').load(page);
 		return false;
 	});
 	$('#registerGroup').click(function() {
-		var page = $(this).attr('href');
-		$('#content').load('templates/groupAdding.jsp');
+		$('#content').load("templates/groupAdding.jsp");
 		return false;
 	});	
 	</script>

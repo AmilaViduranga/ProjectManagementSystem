@@ -33,14 +33,29 @@ public class Member {
 	private Double cgpa;
 
 	@Column(name = "contact_no")
-	private Date contactNo;
+	private String contactNo;
+
+	public String getMemberIdNo() {
+		return memberIdNo;
+	}
+
+	public void setMemberIdNo(String memberIdNo) {
+		this.memberIdNo = memberIdNo;
+	}
+
+	public String getContactNo() {
+		return contactNo;
+	}
+
+	public void setContactNo(String contactNo) {
+		this.contactNo = contactNo;
+	}
 
 	@Column(name = "member_type")
 	private Boolean memberType;
 
 	@Column(name = "cv")
 	private String cv;
-	
 	
 	@Column(name = "group_Id", unique = true)
 	private String groupId;
@@ -94,14 +109,6 @@ public class Member {
 
 	public void setCgpa(Double cgpa) {
 		this.cgpa = cgpa;
-	}
-
-	public Date getContactNo() {
-		return contactNo;
-	}
-
-	public void setContactNo(Date contactNo) {
-		this.contactNo = contactNo;
 	}
 
 	public Boolean getMemberType() {
