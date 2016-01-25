@@ -4,9 +4,11 @@ import java.util.List;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.pms.model.Member;
+import com.pms.model.User;
 import com.pms.DAO.GroupRegistrationDAO;
 import com.pms.DAO.UserDAO;
 import com.pms.model.Login;
+
 public class GroupRegistrationAction extends ActionSupport {
 	private List<Member> groups;
 	private List<Member> members;
@@ -16,8 +18,7 @@ public class GroupRegistrationAction extends ActionSupport {
 	private String groupIdName;
 	private String groupLeader;
 	private Login login;
-	
-	
+
 	public Login getLogin() {
 		return login;
 	}
@@ -29,7 +30,7 @@ public class GroupRegistrationAction extends ActionSupport {
 	public String getGroupLeader() {
 		return groupLeader;
 	}
-	
+
 	public void setGroupLeader(String groupLeader) {
 		this.groupLeader = groupLeader;
 	}
@@ -73,8 +74,9 @@ public class GroupRegistrationAction extends ActionSupport {
 	public void setDao(GroupRegistrationDAO dao) {
 		this.dao = dao;
 	}
+
 	private Member member;
-	
+
 	public Member getMember() {
 		return member;
 	}
@@ -82,12 +84,11 @@ public class GroupRegistrationAction extends ActionSupport {
 	public void setMember(Member member) {
 		this.member = member;
 	}
-	
+
 	public GroupRegistrationAction() {
 		dao = new GroupRegistrationDAO();
 	}
-	
-	
+
 	public List<Member> getMembers() {
 		return members;
 	}
@@ -96,24 +97,36 @@ public class GroupRegistrationAction extends ActionSupport {
 		this.members = members;
 	}
 
-	//methods Action
+	// methods Action
 	public String execute() {
 		UserDAO daoUser = new UserDAO();
-		String password = daoUser.userAuthonticate(login);
-		if (password.equals(login.getUserPassword())) {
-			login.setLoginState("logged");
-			groups = dao.getRegisteredGroups();
-			System.out.println(groups);
-			return "success";
-			
+		User currentUser = daoUser.userAuthonticate(login);
+		String password = currentUser.getUserPassword();
+		String userType = currentUser.getUserType();
+		if (userType.equals("admin") || userType.equals("hod") || userType.equals("lecturerIncharge")) {
+			if (password.equals(login.getUserPassword())) {
+				login.setLoginState("logged");
+				return userType;
+
+			} else {
+				login.setLoginState("errorLogin");
+				addActionError("invalid login");
+				return "fail";
+			}
 		} else {
-			login.setLoginState("errorLogin");
-			addActionError("invalid login");
-			return "fail";
+			if (password.equals(login.getUserPassword())) {
+				login.setLoginState("logged");
+				groups = dao.getRegisteredGroups();
+				return "success";
+
+			} else {
+				login.setLoginState("errorLogin");
+				addActionError("invalid login");
+				return "fail";
+			}
 		}
-		
 	}
-	
+
 	public String loadGroups() {
 		groups = dao.getRegisteredGroups();
 		System.out.println(groups);
@@ -127,5 +140,5 @@ public class GroupRegistrationAction extends ActionSupport {
 		System.out.println(members);
 		return "success";
 	}
-	
+
 }

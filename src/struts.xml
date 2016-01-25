@@ -13,6 +13,9 @@
 
 		<action name="login" class="com.pms.Action.GroupRegistrationAction">
 			<result name="success">/GroupList.jsp</result>
+			<result name="hod">/templates/hod/hodHome.jsp</result>
+			<result name="admin">/templates/admin/adminHome.jsp</result>
+			<result name="lecturerIncharge">/templates/lecturerIncharge/lecturerInchargeHome.jsp</result>
 			<result name="fail">/index.jsp</result>
 		</action>
 		
@@ -27,7 +30,13 @@
 		</action> 
 		
 		<action name="getGroupIndividual" class="com.pms.Action.GroupRegistrationAction" method="getListMembers">
-			<result name="success">/templates/groupIndividual.jsp</result>    
+			<result name="success">/templates/groupIndividual.jsp</result>
+			<result name="fail">/lecturerSignUp.jsp</result>    
+		</action>
+		
+		<action name="authonticateLecturer" class="com.pms.Action.LoginAction" method="authonticateLecturer">
+		    <result name="success">/templates/lecturer/lecturerHome.jsp</result>
+		    <result name="fail">/lecturerSignUp.jsp</result>
 		</action>	
 	</package>
 </struts>
