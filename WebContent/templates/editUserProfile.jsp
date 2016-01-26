@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@taglib prefix="s" uri="/struts-tags"%>
  <form class="form-horizontal">   
  <div class="panel panel-default">
 	  <div class="panel-heading clearfix">
 	  		<i class="fa fa-user pull-left"></i>
 	    	<h3 class="panel-title pull-left">Edit Profile</h3>
 	      	<div class="btn-group pull-right" id="btnPanel">
-			      <button class="btn btn-primary" id="backView">
+			      <button class="btn btn-primary" id="backView" action="getUser.action">
 			        <i class="fa fa-arrow-left"></i>
 			        Back
 			      </button>
@@ -16,6 +17,7 @@
 			      </button>
     		</div>
 	  </div>
+	  
 	  <div class="modal-body">
 		  	<div class="form-group">
 		        <label class="col-xs-3 control-label">user Name</label>
@@ -68,6 +70,7 @@
 		        </div>
 	  		</div>
 	</div>
+	
 </div>
 </form>
 <script type="text/javascript">

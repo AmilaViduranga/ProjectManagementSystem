@@ -28,4 +28,12 @@ public class UserDAO {
 		List<EnrolmentKey> password = session.createQuery("FROM EnrolmentKey e WHERE e.catagory='"+catagory+"'").list();
 		return password.get(0);
 	}
+	
+	public User getUser(String individualLogin) {
+		Session session = DbConnectionManager.getSessionFactory().openSession();
+		session.beginTransaction();
+		List<User> individualusers = 
+			session.createQuery("FROM User u where u.userIdNo = :userIdNum").setString("userIdNum", individualLogin).list();
+		return individualusers.get(0);
+	}
 }

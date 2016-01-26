@@ -35,20 +35,6 @@ public class LoginAction extends ActionSupport {
 	 * Methods
 	 */
 	// authonticate the user at login state
-//	public String authonticateLogin() {
-//		UserDAO dao = new UserDAO();
-//		String password = dao.userAuthonticate(login);
-//		if (password.equals(login.getUserPassword())) {
-//			login.setLoginState("logged");
-//			GroupRegistrationAction groupAction = new GroupRegistrationAction();
-//			return groupAction.execute();
-//		} else {
-//			login.setLoginState("errorLogin");
-//			addActionError("invalid login");
-//			return "fail";
-//		}
-//		
-//	}
 	
 	public String authonticateLecturer() {
 		System.out.println("action Called");

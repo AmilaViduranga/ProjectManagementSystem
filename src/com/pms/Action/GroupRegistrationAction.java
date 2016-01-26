@@ -1,7 +1,11 @@
 package com.pms.Action;
 
+import java.util.Map;
 import java.util.List;
-
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import org.apache.struts2.interceptor.SessionAware;
+import org.apache.struts2.interceptor.ServletRequestAware;
 import com.opensymphony.xwork2.ActionSupport;
 import com.pms.model.Member;
 import com.pms.model.User;
@@ -9,7 +13,7 @@ import com.pms.DAO.GroupRegistrationDAO;
 import com.pms.DAO.UserDAO;
 import com.pms.model.Login;
 
-public class GroupRegistrationAction extends ActionSupport {
+public class GroupRegistrationAction extends ActionSupport implements SessionAware {
 	private List<Member> groups;
 	private List<Member> members;
 	private GroupRegistrationDAO dao;
@@ -18,7 +22,8 @@ public class GroupRegistrationAction extends ActionSupport {
 	private String groupIdName;
 	private String groupLeader;
 	private Login login;
-
+	private Map<String, Object> sessionMap;
+	
 	public Login getLogin() {
 		return login;
 	}
@@ -96,6 +101,15 @@ public class GroupRegistrationAction extends ActionSupport {
 	public void setMembers(List<Member> members) {
 		this.members = members;
 	}
+	
+	public Map<String, Object> getSessionMap() {
+		return sessionMap;
+	}
+
+	public void setSessionMap(Map<String, Object> sessionMap) {
+		this.sessionMap = sessionMap;
+	}
+
 
 	// methods Action
 	public String execute() {
@@ -106,6 +120,8 @@ public class GroupRegistrationAction extends ActionSupport {
 		if (userType.equals("admin") || userType.equals("hod") || userType.equals("lecturerIncharge")) {
 			if (password.equals(login.getUserPassword())) {
 				login.setLoginState("logged");
+				sessionMap.put("userIdNo", login.getUserName());
+				System.out.print(sessionMap.get("userIdNo"));
 				return userType;
 
 			} else {
@@ -116,6 +132,8 @@ public class GroupRegistrationAction extends ActionSupport {
 		} else {
 			if (password.equals(login.getUserPassword())) {
 				login.setLoginState("logged");
+				sessionMap.put("userIdNo", login.getUserName());
+				System.out.print((String)sessionMap.get("userIdNo"));
 				groups = dao.getRegisteredGroups();
 				return "success";
 
@@ -131,7 +149,6 @@ public class GroupRegistrationAction extends ActionSupport {
 		groups = dao.getRegisteredGroups();
 		System.out.println(groups);
 		return "success";
-
 	}
 
 	public String getListMembers() {
@@ -140,5 +157,10 @@ public class GroupRegistrationAction extends ActionSupport {
 		System.out.println(members);
 		return "success";
 	}
-
+	
+	@Override
+	public void setSession(Map<String, Object> sessionMap) {
+		this.sessionMap = sessionMap;
+		
+	}
 }
