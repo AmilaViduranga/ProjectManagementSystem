@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@taglib prefix="s" uri="/struts-tags"%>
  <form class="form-horizontal">   
  <div class="panel panel-default">
 	  <div class="panel-heading clearfix">
@@ -16,6 +17,7 @@
 			      </button>
     		</div>
 	  </div>
+	  
 	  <div class="modal-body">
 		  	<div class="form-group">
 		        <label class="col-xs-3 control-label">user Name</label>
@@ -68,6 +70,7 @@
 		        </div>
 	  		</div>
 	</div>
+	
 </div>
 </form>
 <script type="text/javascript">

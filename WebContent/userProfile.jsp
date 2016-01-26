@@ -23,6 +23,6 @@
 		</div>
 	</body>
 	<script type="text/javascript">
-	$('#userProfile').load("templates/viewUserProfile.jsp");
+	$('#userProfile').load("getUser.action");
 	</script>
 </html>

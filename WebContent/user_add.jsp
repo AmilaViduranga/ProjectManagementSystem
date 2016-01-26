@@ -13,12 +13,13 @@
 		<div class="col-sm-1"></div>
 		<div class="col-sm-10">
 			<s:form name="myform" cssClass="form-horizontal" action="add"
-				method="post" onsubmit="return checkForm(this);">
+				method="post" enctype="multipart/form-data"
+				onsubmit="return Validate(this);">
 				<div class="col-sm-8">
 					<div class="panel panel-default">
 						<div class="panel-heading clearfix">
 							<h3 class="panel-title pull-left">
-								<i class="fa fa-user"></i> USER Register
+								<i class="fa fa-user"></i> Student Register
 							</h3>
 							<div class="btn-group pull-right">
 								<button class="btn btn-primary">
@@ -28,43 +29,56 @@
 						</div>
 						<div class="modal-body">
 							<div class="form-group">
-								<label class="col-xs-3 control-label">User Name</label>
+								<label class="col-xs-3 control-label">IT NUMBER</label>
 								<div class="col-xs-9">
-									<input type="text" class="form-control" id="empName"
-										name="user.userIdNo" placeholder="your IT No" required>
+									<input maxlength="10" type="text" class="form-control"
+										id="userName" name="user.userIdNo" placeholder="your IT No"
+										required/>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-xs-3 control-label">Name</label>
+								<div class="col-xs-9">
+									<input type="text" class="form-control" id="name"
+										name="user.userName" placeholder="your Name" required>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-xs-3 control-label">CGPA</label>
+								<div class="col-xs-9">
+									<input type="text" class="form-control" id="name"
+										name="user.userCGPA" placeholder="your CGPA" required>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-xs-3 control-label">Contact No</label>
+								<div class="col-xs-9">
+									<input type="number" class="form-control" id="name"
+										name="user.userContactNo" placeholder="your Contact No"
+										required>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-xs-3 control-label">E-mail</label>
 								<div class="col-xs-9">
-									<input type="text" class="form-control" id="empNic"
+									<input type="email" class="form-control" id="empNic"
 										name="user.userEmail" placeholder="your Email" required>
 								</div>
 							</div>
-							<div class="form-group">
-								<label class="col-xs-3 control-label">Type</label>
-								<div class="col-xs-9">
-									<select class="form-control" name="user.userType" required>
-										<option selected value="">Select</option>
-										<option selected value="student">Student</option>
-										<option value="lecturer">Lecturer</option>
-										<option value="lecturerIncharge">Lecturer Incharge</option>
-									</select>
-								</div>
-							</div>
+
 							<div class="form-group">
 								<label class="col-xs-3 control-label">Password</label>
 								<div class="col-xs-9">
-									<input type="password" class="form-control"
-										name="userPassword" placeholder="your Password" required>
+									<input type="password" class="form-control" id="password"
+										name="user.userPassword" placeholder="your Password" required>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-xs-3 control-label"> Confirm Password</label>
 								<div class="col-xs-9">
 									<input type="password" class="form-control"
-										name="confirmPassword" placeholder="confirm password"
-										required value="user.confirmPassword">
+										id="confirmPassword" name="user.confirmPassword"
+										placeholder="confirm password"required">
 								</div>
 							</div>
 						</div>
@@ -78,50 +92,16 @@
 							</h3>
 						</div>
 						<div class="panel-body">Set your profile Picture</div>
-						<img id="upImage" src="image/sliiit_logo.jpg"
-							class="img-responsive" />
+						<img src="uploads/<s:property value="user.photoFileName"/>" />
+
 						<div class="panel-footer">
-							<input type="file" class="form-control btn-" id="imgInp"
-								name="user.userImage">
+							<s:file class="form-control btn-" name="user.photo">
+							</s:file>
 						</div>
+
 					</div>
 				</div>
 			</s:form>
-			<script type="text/javascript">
-				function readURL(input) {
-					if (input.files && input.files[0]) {
-						var reader = new FileReader();
-						reader.onload = function(e) {
-							$('#upImage').attr('src', e.target.result);
-						}
-						reader.readAsDataURL(input.files[0]);
-					}
-				}
-				$("#imgInp").change(function() {
-					readURL(this);
-				});
-			</script>
-
-			<s:if test="hasActionErrors()">
-				<script type="text/javascript">
-					alertify.error("Not inserted data properly, check it now");
-				</script>
-			</s:if>
-			<script type="text/javascript">
-				function checkForm() {
-
-					var password = document.myform.userPassword.value;
-					var confirm = document.myform.confirmPassword.value
-					alert("this is password  "+password);
-					if (password != confirm) {
-						alertify
-								.error("password and Confirm Password is mismatch");
-
-					}
-
-				}
-			</script>
-
 
 
 
@@ -129,4 +109,50 @@
 		<div class="col-sm-1"></div>
 	</div>
 </body>
+<script type="text/javascript">
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$('#upImage').attr('src', e.target.result);
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+	$("#imgInp").change(function() {
+		readURL(this);
+	});
+</script>
+<s:if test="hasActionErrors()">
+	<script type="text/javascript">
+		alertify.error("Please Check values");
+	</script>
+</s:if>
+
+<script type="text/javascript">
+	function Validate() {
+		var password = document.getElementById("password").value;
+		alert(password);
+		var confirmPassword = document.getElementById("confirmPassword").value;
+		var userName = document.getElementById("userName").value;
+		if (password != confirmPassword) {
+			alertify.error("Password And Confirm Password Not Matching");
+			alert(confirmPassword);
+
+			return false;
+		}
+		
+		return true;
+	}
+</script>
+
+
+
+
+
+
+
+
+
+
 </html>

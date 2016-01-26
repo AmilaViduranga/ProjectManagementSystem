@@ -6,7 +6,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class DB {
-// Genaric method for calling session factory
+
 	public static SessionFactory sf = buildSessionFactory();
 	
 	public static SessionFactory buildSessionFactory() {

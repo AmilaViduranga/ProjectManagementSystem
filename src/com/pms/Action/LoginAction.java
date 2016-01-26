@@ -1,10 +1,21 @@
 package com.pms.Action;
 
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.interceptor.ServletRequestAware;
+import org.apache.struts2.interceptor.SessionAware;
+
 import com.opensymphony.xwork2.ActionSupport;
 import com.pms.DAO.UserDAO;
 import com.pms.model.Login;
 
-public class LoginAction extends ActionSupport {
+public class LoginAction extends ActionSupport implements SessionAware {
+	
+	private Map<String, Object> sessionMap;
+	
 	/*
 	 * Variable diclaration 
 	 */
@@ -30,12 +41,18 @@ public class LoginAction extends ActionSupport {
 		String password = dao.userAuthonticate(login);
 		if (password.equals(login.getUserPassword())) {
 			login.setLoginState("logged");
+			sessionMap.put("userIdNo", login.getUserName());
 			return "success";
 		} else {
 			login.setLoginState("errorLogin");
 			addActionError("invalid login");
 			return "fail";
 		}
+	}
+
+	@Override
+	public void setSession(Map<String, Object> sessionMap) {
+		this.sessionMap = sessionMap;
 		
 	}
 	
