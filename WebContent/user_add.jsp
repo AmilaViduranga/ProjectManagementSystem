@@ -4,7 +4,7 @@
 <html>
 <head>
 <jsp:include page="includes/cssAndJsCalling.jsp" />
-<jsp:include page="includes/header.jsp" />
+<jsp:include page="includes/headerNewUser.jsp" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Register</title>
 </head>

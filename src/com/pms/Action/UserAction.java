@@ -68,18 +68,6 @@ public class UserAction extends ActionSupport {
 		return SUCCESS;
 	}
 
-//	@Override
-//	public void validate() {
-//
-//		System.out.println("this is validator>>");
-//		System.out.println("this is password>>  " + user.getUserPassword());
-//		System.out.println("this is confirmpassword  >>>" + user.getConfirmPassword());
-//
-//		 if(!user.getUserPassword().equals(user.getConfirmPassword())){
-//			 System.out.println("password and confirm password missmatch");
-//			 addActionError("invalid login");
-//			 addFieldError("user.userPassword","password and confirm password missmatch" );
-//		 }
-//	}
+
 
 }

@@ -39,7 +39,9 @@
 	        					</div>
 	      					</div>
 	  					</div>
-	  					<a href="user_add.jsp"><small class="btn btn-link pull-right">Sign up</small></a>
+	  					<a href="lecturerSignUp.jsp"><small class="btn btn-link pull-right">Lecturer sign up</small></a>
+	  					<a href="#"><small class="btn btn-link pull-right">Student Sign up</small></a>
+	  					<a href="contactUs_add.jsp"><small class="btn btn-link pull-right">Contact Us</small></a>
   					</div>
 				</s:form>
 			</div>

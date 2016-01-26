@@ -7,10 +7,18 @@
     <div class="col-md-8">
     	<ul class="nav navbar-nav navbar-inverse pull-left">
             <li>
-                <a href="GroupList.jsp">
+                <a href="groupPage.action">
                     <h5>
                         <i class="fa fa-users" style="margin-left: 10px;"></i>
                         Student Groups
+                    </h5>
+                </a>
+            </li>
+            <li>
+                <a href="contactUs_add.jsp">
+                    <h5>
+                        <i class="fa fa-phone" style="margin-left: 10px;"></i>
+                        Contact Us
                     </h5>
                 </a>
             </li>

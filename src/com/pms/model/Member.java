@@ -13,15 +13,15 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "member")
+@Table(name = "pms_member")
 public class Member {
 
-	@ManyToOne
-	@JoinColumn(name = "group_id")
-	private Group group;
+	@Id
+	@GeneratedValue
+	private int id;
 
-	@Column(name = "idNo", unique = true)
-	private String idNo;
+	@Column(name = "member_id_No", unique = true)
+	private String memberIdNo;
 
 	@Column(name = "member_name")
 	private String memberName;
@@ -33,7 +33,23 @@ public class Member {
 	private Double cgpa;
 
 	@Column(name = "contact_no")
-	private Date contactNo;
+	private String contactNo;
+
+	public String getMemberIdNo() {
+		return memberIdNo;
+	}
+
+	public void setMemberIdNo(String memberIdNo) {
+		this.memberIdNo = memberIdNo;
+	}
+
+	public String getContactNo() {
+		return contactNo;
+	}
+
+	public void setContactNo(String contactNo) {
+		this.contactNo = contactNo;
+	}
 
 	@Column(name = "member_type")
 	private Boolean memberType;
@@ -41,26 +57,34 @@ public class Member {
 	@Column(name = "cv")
 	private String cv;
 	
+	@Column(name = "group_Id", unique = true)
+	private String groupId;
 	
-	
-	
-	
-	
-
-	public Group getGroup() {
-		return group;
+	public String getGroupId() {
+		return groupId;
 	}
 
-	public void setGroup(Group group) {
-		this.group = group;
+	public void setGroupId(String groupId) {
+		this.groupId = groupId;
 	}
 
+	public String getGroupType() {
+		return groupType;
+	}
+
+	public void setGroupType(String groupType) {
+		this.groupType = groupType;
+	}
+
+	@Column(name = "group_type")
+	private String groupType;
+	
 	public String getIdNo() {
-		return idNo;
+		return memberIdNo;
 	}
 
 	public void setIdNo(String idNo) {
-		this.idNo = idNo;
+		this.memberIdNo = idNo;
 	}
 
 	public String getMemberName() {
@@ -85,14 +109,6 @@ public class Member {
 
 	public void setCgpa(Double cgpa) {
 		this.cgpa = cgpa;
-	}
-
-	public Date getContactNo() {
-		return contactNo;
-	}
-
-	public void setContactNo(Date contactNo) {
-		this.contactNo = contactNo;
 	}
 
 	public Boolean getMemberType() {
