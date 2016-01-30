@@ -15,5 +15,6 @@
 		<mapping class="com.pms.model.User"></mapping>
 		<mapping class="com.pms.model.Member"></mapping>
 		<mapping class="com.pms.model.EnrolmentKey"></mapping>
+		<mapping class="com.pms.model.Group"></mapping>
 	</session-factory>
 </hibernate-configuration>

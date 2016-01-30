@@ -22,10 +22,10 @@
 					  			<i class="fa fa-1x fa fa-list pull-left"></i>
 						    	<h3 class="panel-title pull-left">Registered groups</h3>
 						    	<div class="btn-group pull-right">
-                                 <button class="btn btn-success" id="registerGroup">
-                                         <i class="fa fa-plus"></i>
-                                         new Register
-                                 </button>
+                                 <a class="btn btn-success btn-block pull-right" href="getStudentIds.action" id="registerGroup">
+        							<i class="fa fa-plus"></i>
+        							Register
+      							 </a>
                              </div>
 						    </div>
 					    	<div class="list-group" id="groupList">
@@ -71,8 +71,14 @@
 		return false;
 	});
 	$('#registerGroup').click(function() {
-		$('#content').load("templates/groupAdding.jsp");
+		var page = $(this).attr('href');
+		$('#content').load(page);
 		return false;
 	});	
 	</script>
+	<s:if test="hasActionMessages()">
+		<script type="text/javascript">
+			alertify.success("Inserted values properly");
+		</script>
+	</s:if>
 </html>

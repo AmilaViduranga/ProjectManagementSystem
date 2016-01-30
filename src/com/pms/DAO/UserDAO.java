@@ -7,10 +7,12 @@ import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.opensymphony.xwork2.inject.util.Strings;
 import com.pms.model.EnrolmentKey;
+import com.pms.model.Group;
 import com.pms.model.Login;
 import com.pms.model.User;
 public class UserDAO {
@@ -35,5 +37,13 @@ public class UserDAO {
 		List<User> individualusers = 
 			session.createQuery("FROM User u where u.userIdNo = :userIdNum").setString("userIdNum", individualLogin).list();
 		return individualusers.get(0);
+	}
+	
+	public List<User> getStudentUsersId(String type) {
+		Session session = DbConnectionManager.getSessionFactory().openSession();
+		session.beginTransaction();
+		String notRegistered = "notRegistered";
+		List<User> users = session.createQuery("FROM User u WHERE u.userType = '"+type+"' AND u.groupRegisteredState = '"+notRegistered+"'").list();
+		return users;
 	}
 }

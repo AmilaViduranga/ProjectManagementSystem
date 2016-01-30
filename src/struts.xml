@@ -65,6 +65,13 @@
 		<action name="getUser" class="com.pms.Action.UserAction" method="getUserIndividual">
 			<result name="success">/templates/viewUserProfile.jsp</result>
 		</action>
-			
+		
+		<action name="getStudentIds" class="com.pms.Action.GroupRegistrationAction" method="getMembersId">
+		    <result name="success">/templates/groupAdding.jsp</result>
+		</action>
+		
+		<action name="saveGroup" class="com.pms.Action.GroupRegistrationAction" method="addGroup">
+		    <result name="success">/GroupList.jsp</result>
+		</action>	
 	</package>
 </struts>

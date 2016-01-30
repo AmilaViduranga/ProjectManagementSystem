@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<form class="form-horizontal">
+<%@taglib prefix="s" uri="/struts-tags"%>
+<form Class="form-horizontal" onSubmit="return validateValues()" action="saveGroup">
 	<div class="panel panel-default">
 		<div class="panel-heading clearfix">
 			<i class="fa fa-users pull-left"></i>
@@ -15,53 +16,47 @@
 			<div class="form-group">
 				<label class="col-xs-3 control-label">Token Number</label>
 				<div class="col-xs-9">
-					<input type="text" class="form-control" placeholder="YOur Token">
+					<input type="text" class="form-control" placeholder="Your group Token">
 				</div>
 			</div>
-			<ul id="tabs">
-				<li><a href="#memberOne"> <i class="fa fa-user"></i> Member
-						One
-				</a></li>
-				<li><a href="#memberTwo"> <i class="fa fa-user"></i> Member
-						Two
-				</a></li>
-				<li><a href="#memberThree"> <i class="fa fa-user"></i>
-						Member Three
-				</a></li>
-				<li><a href="#memberFour"> <i class="fa fa-user"></i>
-						Member Four
-				</a></li>
-				<li><a href="#memberFive"> <i class="fa fa-user"></i>
-						Member five
-				</a></li>
-			</ul>
-			<div id="memberOne" class="tab-section">
-				<jsp:include page="members/memberOne.jsp"></jsp:include>
-			</div>
-			<div id="memberTwo" class="tab-section">
-				<jsp:include page="members/memberTwo.jsp"></jsp:include>
-			</div>
-			<div id="memberThree" class="tab-section">
-				<jsp:include page="members/memberThree.jsp"></jsp:include>
-			</div>
-			<div id="memberFour" class="tab-section">
-				<jsp:include page="members/memberFour.jsp"></jsp:include>
-			</div>
-			<div id="memberFive" class="tab-section">
-				<jsp:include page="members/memberFive.jsp"></jsp:include>
+			<div class="panel panel-default">
+  				<div class="panel-heading clearfix">
+   		 			<h3 class="panel-title pull-left">Members</h3>
+   		 		</div>
+   		 		<div class="panel-body">
+					<div class="form-group">
+				        <label class="col-xs-3 control-label">Member One</label>
+				        <div class="col-xs-9">
+					          <s:select cssClass="form-control" list="userIds" name="memberOne"></s:select>
+				        </div>
+				    </div>
+				    <div class="form-group">
+				        <label class="col-xs-3 control-label">Member Two</label>
+				        <div class="col-xs-9">
+					         <s:select cssClass="form-control" list="userIds" name="memberTwo"></s:select>
+				        </div>
+				    </div>
+				    <div class="form-group">
+				        <label class="col-xs-3 control-label">Member Three</label>
+				        <div class="col-xs-9">
+					          <s:select cssClass="form-control" list="userIds" name="memberThree"></s:select>
+				        </div>
+				    </div>
+				</div>
 			</div>
 		</div>
 	</div>
 </form>
 <script type="text/javascript">
-	$(function() {
-		$('.tab-section').hide();
-		$('#tabs a').bind('click', function(e) {
-			$('#tabs a.current').removeClass('current');
-			$('.tab-section:visible').hide();
-			$(this.hash).show();
-			$(this).addClass('current');
-			e.preventDefault();
-		}).filter(':first').click();
-	});
+	function validateValues() {
+		var memberOne = document.getElementById("memberOne").value;
+		var memberTwo = document.getElementById("memberTwo").value;
+		var memberThree = document.getElementById("memberThree").value;
+		if (memberOne == memberTwo || memberTwo == memberThree || memberOne == memberThree) {
+			alertify.error("Duplicate Member Id's entered");
+			return false;
+		}
+		return true;
+	}
+		
 </script>

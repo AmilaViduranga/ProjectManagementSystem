@@ -63,6 +63,9 @@ public class User {
 	
 	@Column(name = "photo")
 	private File photo;
+	
+	@Column(name = "group_registered_state")
+	private String groupRegisteredState;
 
 	private String photoFileName;
 	private String photoContentType;
@@ -208,4 +211,11 @@ public class User {
 		this.photoContentType = photoContentType;
 	}
 
+	public String getGroupRegisteredState() {
+		return groupRegisteredState;
+	}
+
+	public void setGroupRegisteredState(String groupRegisteredState) {
+		this.groupRegisteredState = groupRegisteredState;
+	}
 }
