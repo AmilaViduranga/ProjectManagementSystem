@@ -10,57 +10,65 @@ import org.hibernate.Session;
 import com.pms.model.Group;
 //import com.pms.util.HibernateUtil;
 import com.pms.model.Member;
+import com.pms.model.User;
 
 public class GroupRegistrationDAO {
-	public List<Member> getRegisteredGroups() {
+	public Group getRegisteredGroups(String userName) {
 		Session session = DbConnectionManager.getSessionFactory().openSession();
 		session.beginTransaction();
-		List<Member> groups = null;
+		List<Group> groups = null;
 		try {
-			String type = "Leader";
-			groups = (List<Member>)session.createQuery("FROM Member m WHERE m.memberType = '"+type+"' GROUP BY m.groupId").list();
+			groups = (List<Group>)session.createQuery("FROM Group g WHERE g.memberId = '"+userName+"'").list();
+			if(groups.size() == 0) {
+				return null;
+			}
 			
-		} catch (HibernateException e) {
+		} catch (Exception e) {
             e.printStackTrace();
             session.getTransaction().rollback();
         }
         session.getTransaction().commit();
-        return groups;
+        return groups.get(0);
 	}
 	
-	public List<Member> getMembersIndividualGroup(String groupId) {
+	public List<Group> getMembersIndividualGroup(String groupId) {
 		Session session = DbConnectionManager.getSessionFactory().openSession();
 		session.beginTransaction();
-		List<Member> members = null;
+		List<Group> members = null;
 		try {
-			members = (List<Member>)session.createQuery("From Member m WHERE m.groupId = '"+groupId+"'").list();
+			members = (List<Group>)session.createQuery("From Group g WHERE g.groupId = '"+groupId+"'").list();
+			System.out.println("Members are "+ members);
 		} catch (HibernateException e) {
             e.printStackTrace();
             session.getTransaction().rollback();
         }
-		session.getTransaction().commit();
+//		session.getTransaction().commit();
 		return members;
 	}
 	
 	public boolean addMemberToGroup(Group group) {
 		Session session = DbConnectionManager.getSessionFactory().openSession();
 		session.beginTransaction();
-//		int count = this.getCountOfRegisteredGroups()+1;
-//		group.setGroupId(count);
-//		System.out.println("The Group id is "+ count);
 		session.save(group);
 		String regState = "Registered";
 		Query query = session.createQuery("UPDATE User u SET u.groupRegisteredState = '"+regState+"' WHERE u.userIdNo = '"+group.getMemberId()+"'");
 		int result = query.executeUpdate();
-		
 		session.getTransaction().commit();
 		return true;
 	}
 	
-	public List getCountOfRegisteredGroups(){
+	public String getCountOfRegisteredGroups(){
 		Session session = DbConnectionManager.getSessionFactory().openSession();
 		session.beginTransaction();
-		List count = (List)session.createQuery("SELECT COUNT(g.groupId) FROM Group g GROUP BY g.groupId").list();
-		return count;
+		List count = (List)session.createQuery("SELECT COUNT(g.groupId) FROM Group g").list();
+		return count.get(0).toString();
+	}
+	
+	public String getLeader(String userId) {
+		Session session = DbConnectionManager.getSessionFactory().openSession();
+		session.beginTransaction();
+		List<User> user = (List<User>)session.createQuery("FROM User u WHERE u.userIdNo = '"+userId+"'").list();
+		System.out.println("the user is at dao " +user.get(0).getUserName().toString());
+		return user.get(0).getUserName();
 	}
 }

@@ -4,13 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.apache.struts2.interceptor.SessionAware;
 import org.apache.struts2.interceptor.ServletRequestAware;
-
 import com.opensymphony.xwork2.ActionSupport;
 import com.pms.model.Group;
 import com.pms.model.Member;
@@ -20,8 +17,12 @@ import com.pms.DAO.UserDAO;
 import com.pms.model.Login;
 
 public class GroupRegistrationAction extends ActionSupport implements SessionAware {
-	private List<Member> groups;
-	private List<Member> members;
+	
+	/*
+	 * private attributes
+	 */
+	private Group groups;
+	private List<Group> members;
 	private List<User> users;
 	private GroupRegistrationDAO dao;
 	private String GroupId;
@@ -34,15 +35,17 @@ public class GroupRegistrationAction extends ActionSupport implements SessionAwa
 	private String memberOne;
 	private String memberTwo;
 	private String memberThree;
-	private String userName;
+	private String leaderName;
 	
-	
-	public String getUserName() {
-		return userName;
+	/*
+	 *  Getters and setters
+	 */
+	public String getLeaderName() {
+		return leaderName;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setLeaderName(String leaderName) {
+		this.leaderName = leaderName;
 	}
 
 	public String getMemberOne() {
@@ -125,11 +128,11 @@ public class GroupRegistrationAction extends ActionSupport implements SessionAwa
 		Leader = leader;
 	}
 
-	public List<Member> getGroups() {
+	public Group getGroups() {
 		return groups;
 	}
 
-	public void setGroups(List<Member> groups) {
+	public void setGroups(Group groups) {
 		this.groups = groups;
 	}
 
@@ -155,11 +158,11 @@ public class GroupRegistrationAction extends ActionSupport implements SessionAwa
 		dao = new GroupRegistrationDAO();
 	}
 
-	public List<Member> getMembers() {
+	public List<Group> getMembers() {
 		return members;
 	}
 
-	public void setMembers(List<Member> members) {
+	public void setMembers(List<Group> members) {
 		this.members = members;
 	}
 	
@@ -171,8 +174,12 @@ public class GroupRegistrationAction extends ActionSupport implements SessionAwa
 		this.sessionMap = sessionMap;
 	}
 
-
-	// methods Action
+	
+	/*
+	 * Action Methods
+	 * this is default method in struts 2
+	 * this will load the group list when user loged to home menu
+	 */
 	public String execute() {
 		UserDAO daoUser = new UserDAO();
 		User currentUser = daoUser.userAuthonticate(login);
@@ -186,7 +193,6 @@ public class GroupRegistrationAction extends ActionSupport implements SessionAwa
 				sessionMap.put("loggedUser", userLoginName);
 				System.out.print(sessionMap.get("userIdNo"));
 				return userType;
-
 			} else {
 				login.setLoginState("errorLogin");
 				addActionError("invalid login");
@@ -198,9 +204,16 @@ public class GroupRegistrationAction extends ActionSupport implements SessionAwa
 				sessionMap.put("userIdNo", login.getUserName());
 				sessionMap.put("loggedUser", userLoginName);
 				System.out.print((String)sessionMap.get("userIdNo"));
-				groups = dao.getRegisteredGroups();
+				groups = dao.getRegisteredGroups(login.getUserName());
+				if (groups != null) {
+					leaderName = dao.getLeader(groups.getLeaderId());
+					System.out.println("leader name is " + dao.getLeader(groups.getLeaderId()));
+					GroupId = groups.getGroupId();
+				} else {
+					this.setLeaderName("new");
+					this.setGroupId("new");
+				}
 				return "success";
-
 			} else {
 				login.setLoginState("errorLogin");
 				addActionError("invalid login");
@@ -208,18 +221,28 @@ public class GroupRegistrationAction extends ActionSupport implements SessionAwa
 			}
 		}
 	}
-
+	
+	/*
+	 * this method will load the all the groups
+	 */
 	public String loadGroups() {
-		groups = dao.getRegisteredGroups();
-		System.out.println(groups);
+		groups = dao.getRegisteredGroups(sessionMap.get("userIdNo").toString());
+		leaderName = dao.getLeader(groups.getLeaderId());
+		GroupId = groups.getGroupId();
 		return "success";
 	}
 
+	/*
+	 * this method will get all the members registerd
+	 */
 	public String getListMembers() {
 		members = dao.getMembersIndividualGroup(this.groupIdName);
 		return "success";
 	}
 	
+	/*
+	 * use to get registered members id with given group id
+	 */
 	public String getMembersId() {
 		UserDAO dao = new UserDAO();
 		userIds = new ArrayList<String>();
@@ -227,23 +250,27 @@ public class GroupRegistrationAction extends ActionSupport implements SessionAwa
 		for (int i=0; i<users.size(); i++){
 			User iuser = new User();
 			iuser = users.get(i);
+			if (iuser.getUserIdNo().equals(sessionMap.get("userIdNo"))) {
+				continue;
+			}
 			String userId = iuser.getUserIdNo();
-			System.out.println(userId);
 			userIds.add(userId);
 		}
-		System.out.println(users);
 		return "success";
 	}
+	
+	/*
+	 * this will add group to database
+	 */
 	public String addGroup() {
 		System.out.println("Add group Action called");
 		Group group = new Group();
 		String result;
 		
 		GroupRegistrationDAO dao = new GroupRegistrationDAO();
-		List count = dao.getCountOfRegisteredGroups();
-//		String getCount = (String)count.get(0);
-		System.out.println("the count is "+count.get(0));
-		
+		String count = dao.getCountOfRegisteredGroups();
+		Integer idGenerate = Integer.parseInt(count) + 1;
+		group.setGroupId(idGenerate.toString());
 		group.setLeaderId((String)sessionMap.get("userIdNo"));
 		group.setMemberId((String)sessionMap.get("userIdNo"));
 		result = this.saveGroup(group);
@@ -261,19 +288,25 @@ public class GroupRegistrationAction extends ActionSupport implements SessionAwa
 		result = this.saveGroup(group);
 		
 		if(result.equals("success")) {
-			addActionMessage("Successfull inserted group");
+			this.loadGroups();
 			return "success";
 		}
 		return "fail";
 	}
 	
+	/*
+	 * use to save member to database
+	 */
 	public String saveGroup(Group group) {
 		boolean result = false;
 		GroupRegistrationDAO dao = new GroupRegistrationDAO();
 		result = dao.addMemberToGroup(group);
 		return "success";
 	}
-	
+	/*
+	 * (non-Javadoc)
+	 * create session object
+	 */
 	@Override
 	public void setSession(Map<String, Object> sessionMap) {
 		this.sessionMap = sessionMap;

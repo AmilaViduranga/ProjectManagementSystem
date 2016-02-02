@@ -23,6 +23,14 @@
                     </h5>
                 </a>
             </li>
+            <li>
+                <a href="help.jsp">
+                    <h5>
+                        <i class="fa fa-info-circle" style="margin-left: 10px;"></i>
+                        Help
+                    </h5>
+                </a>
+            </li>
         </ul>   
     </div>
     <div class="col-md-3">
@@ -30,7 +38,7 @@
     		<li>
     			<a href="userProfile.jsp">
     				<i class="fa fa-user"></i>
-    				<s:property value=""/>
+    				<s:property value="#sessionMap.loggedUser"/>
     				User Profile
     			</a>
     		</li>

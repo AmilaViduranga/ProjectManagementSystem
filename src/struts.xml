@@ -72,6 +72,10 @@
 		
 		<action name="saveGroup" class="com.pms.Action.GroupRegistrationAction" method="addGroup">
 		    <result name="success">/GroupList.jsp</result>
-		</action>	
+		</action>
+		
+		<action name="addcontact" class="com.pms.Action.ContactInfoAction" method="add">
+			<result name="success">/contactUs_add.jsp</result>
+		</action>
 	</package>
 </struts>

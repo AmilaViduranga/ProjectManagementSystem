@@ -13,8 +13,10 @@
 		<div class="row">
 			<div class="col-sm-1"></div>
 			<div class="col-sm-10">
-				<i class="fa fa-4x fa-users pull-left"></i>
-				<h1>Student Groups</h1>
+				<h1>
+					<i class="fa fa-users pull-left"></i>
+					Student Groups
+				</h1>
 				<div class="col-sm-4">
 					<div class="bootcards-list">
 					  	<div class="panel panel-default">
@@ -22,29 +24,38 @@
 					  			<i class="fa fa-1x fa fa-list pull-left"></i>
 						    	<h3 class="panel-title pull-left">Registered groups</h3>
 						    	<div class="btn-group pull-right">
-                                 <a class="btn btn-success btn-block pull-right" href="getStudentIds.action" id="registerGroup">
-        							<i class="fa fa-plus"></i>
-        							Register
-      							 </a>
+						    	<s:if test="%{GroupId == 'new'}">
+	                                 <a class="btn btn-success btn-block pull-right" href="getStudentIds.action" id="registerGroup">
+	        							<i class="fa fa-plus"></i>
+	        							Register
+	      							 </a>
+      							</s:if>
                              </div>
 						    </div>
 					    	<div class="list-group" id="groupList">
-					    	<s:iterator value="groups" var="List">
-					    		<s:url action="getGroupIndividual" id="group" escapeAmp="false">
-    								<s:param name="groupIdName"><s:property value="groupId"/></s:param>
-    								<s:param name="groupLeader"><s:property value="memberName"/></s:param>
-								</s:url>
-						    	<a class="list-group-item" href="<s:property value="#group"/>">
-						        	<div class="row">
+					    		<s:if test="%{GroupId == 'new'}">
+					    			<div class="panel-body">
+								    	<p>You are not currently registered your group, so if you want to register your group
+								    	Press the registration button above and register you group by selecting other members.If
+								    	you registered your group you automatically register as the leader of the group.Remember your Group Id also</p>
+								  </div>
+					    		</s:if> 
+					    		<s:else>
+					    			<s:url action="getGroupIndividual" id="group" escapeAmp="false">
+	    								<s:param name="groupIdName"><s:property value="GroupId"/></s:param>
+	    								<s:param name="groupLeader"><s:property value="leaderName"/></s:param>
+									</s:url>
+							    	<a class="list-group-item" href="<s:property value="#group"/>">
+							        	<div class="row">
 						        		<div class="col-sm-6">
 						        			<i class="fa fa-3x fa-users pull-left"></i>
-					          				<h4 class="list-group-item-heading"><s:property value="groupId"/></h4>
-								            <p class="list-group-item-text"><s:property value="memberName"/></p>
+					          				<h4 class="list-group-item-heading">SEP_<s:property value="GroupId"/></h4>
+					          				<p class="list-group-item-text"><s:property value="leaderName"/></p>
 						        		</div>
 						          	</div>
 							      </a>
-						     </s:iterator>
-					  		</div>
+					    		</s:else>
+					    	</div>
 					  	</div>
 					</div>
 				</div>
@@ -76,9 +87,4 @@
 		return false;
 	});	
 	</script>
-	<s:if test="hasActionMessages()">
-		<script type="text/javascript">
-			alertify.success("Inserted values properly");
-		</script>
-	</s:if>
 </html>

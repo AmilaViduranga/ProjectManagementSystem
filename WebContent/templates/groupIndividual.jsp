@@ -12,7 +12,7 @@
 	    <div class="list-group">
 	      <div class="list-group-item">
 	        <p class="list-group-item-text">Group NO</p>
-	        <h4 class="list-group-item-heading"><s:property value="groupIdName"/></h4>
+	        <h4 class="list-group-item-heading">SEP_<s:property value="groupIdName"/></h4>
 	      </div>
 	      <div class="list-group-item">
 	        <p class="list-group-item-text">Leader</p>
@@ -27,10 +27,9 @@
 				    	<s:iterator value="members" var="individualMember">
 					      <a class="list-group-item" href="#">
 					      		<div class="col-sm-2">
-					      			<img src="image/amila.jpg" class="img-rounded pull-left" style="width:50px; height:50px;"/>
+					      			<i class="fa fa-2x fa-user"></i>
 					      		</div>
-						        <h4 class="list-group-item-heading"><s:property value="memberName"/></h4>
-						        <p class="list-group-item-text"><s:property value="memberIdNo"/></p>
+						        <h4 class="list-group-item-heading"><s:property value="memberId"/></h4>
 					      </a>
 					    </s:iterator>
 				    </div>

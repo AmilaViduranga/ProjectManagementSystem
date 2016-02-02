@@ -16,6 +16,7 @@ import com.pms.model.Group;
 import com.pms.model.Login;
 import com.pms.model.User;
 public class UserDAO {
+	
 	public User userAuthonticate(Login login) {
 		Session session = DbConnectionManager.getSessionFactory().openSession();
 		session.beginTransaction();
