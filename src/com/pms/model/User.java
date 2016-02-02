@@ -67,6 +67,9 @@ public class User {
 	@Column(name = "group_registered_state")
 	private String groupRegisteredState;
 
+	@Column(name = "lecturer_in_charge")
+	private Boolean isLecturerInCharge;
+	
 	private String photoFileName;
 	private String photoContentType;
 
@@ -84,6 +87,14 @@ public class User {
 	
 	public int getId() {
 		return id;
+	}
+
+	public Boolean getIsLecturerInCharge() {
+		return isLecturerInCharge;
+	}
+
+	public void setIsLecturerInCharge(Boolean isLecturerInCharge) {
+		this.isLecturerInCharge = isLecturerInCharge;
 	}
 
 	public Boolean getIsSep() {
