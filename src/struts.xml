@@ -65,6 +65,30 @@
 		<action name="getUser" class="com.pms.Action.UserAction" method="getUserIndividual">
 			<result name="success">/templates/viewUserProfile.jsp</result>
 		</action>
+		
+		<action name="getStudentIds" class="com.pms.Action.GroupRegistrationAction" method="getMembersId">
+		    <result name="success">/templates/groupAdding.jsp</result>
+		</action>
+		
+		<action name="saveGroup" class="com.pms.Action.GroupRegistrationAction" method="addGroup">
+		    <result name="success">/GroupList.jsp</result>
+		</action>
+		
+		<action name="addcontact" class="com.pms.Action.ContactInfoAction" method="add">
+			<result name="success">/contactUs_add.jsp</result>
+		</action>
+		
+		<action name="selectLecturerInCharge" class="com.pms.Action.HodAction" method="getLecturesByNames">
+			<result name="success">/templates/SepLectuerInChargeSelect.jsp</result>
+		</action>
 			
+		<action name="saveLecturerInCharge" class="com.pms.Action.HodAction" method="saveLectureInCharge">
+			<result name="success">/templates/hod/hodHome.jsp</result>
+		</action>
+		
+		<action name="getLecturers" class="com.pms.Action.HodAction" method="getAllLecturers">
+			<result name="success">/templates/SepLecturerAssigning.jsp</result>
+			<result name="fail">/templates/SepLecturerAssigning.jsp</result>    
+		</action>
 	</package>
 </struts>

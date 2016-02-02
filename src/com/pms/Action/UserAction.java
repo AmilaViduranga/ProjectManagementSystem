@@ -73,6 +73,7 @@ public class UserAction extends ActionSupport implements SessionAware {
 	public String add() {
 		Date dNow = new Date();
 		user.setUserDateOfRegister(dNow);
+		user.setGroupRegisteredState("notRegistered");
 		user.setUserType("student");
 		if (!user.getUserPassword().equals(user.getConfirmPassword())) {
 			System.out.println("password and confirm password missmatch");

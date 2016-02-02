@@ -20,7 +20,7 @@
     						<h3 class="panel-title pull-left">Login To Module</h3>
     						<div class="btn-group pull-right">
       							<button class="btn btn-primary" name="addUser">
-	                                <i class="fa fa-key"></i>
+	                                <i class="fa fa-sign-in"></i>
 	                                Login
                                 </button>
     						</div>
