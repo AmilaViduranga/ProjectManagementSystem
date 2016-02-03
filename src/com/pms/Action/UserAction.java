@@ -110,6 +110,7 @@ public class UserAction extends ActionSupport implements SessionAware {
 		Date dNow = new Date();
 		user.setUserDateOfRegister(dNow);
 		user.setUserType("lecturer");
+		user.setIsLecturerInCharge(false);
 		if (!user.getUserPassword().equals(user.getConfirmPassword())) {
 			System.out.println("password and confirm password missmatch");
 			addActionError("invalid registration");

@@ -22,9 +22,13 @@
 			<div class="panel panel-default">
 				<div class="form-group">
 					<div class="col-xs-9">
-						<label class="col-xs-3 control-label">Select Name</label>
-						<s:select value="llname" cssClass="form-control" headerKey="-1"
+						<div class="col-sm-3">
+							<label class="col-xs-3 control-label">Select Name</label>
+						</div>
+						<div class="col-sm-9" style="margine-top:10px">
+							<s:select value="llname" cssClass="form-control" headerKey="-1"
 							headerValue="Select" list="lecturesNames" name="selectedName" />
+						</div>
 					</div>
 				</div>
 

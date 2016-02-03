@@ -16,7 +16,7 @@ this is sep lec ass
 			<div class="btn-group pull-right">
 				<a class="btn btn-success btn-block pull-right"
 					href="selectLecturerInCharge.action" id="registerGroup"> <i
-					class="fa fa-plus"></i> Button
+					class="fa fa-plus"></i> Add new Leccture Incharge
 				</a>
 			</div>
 		</div>
