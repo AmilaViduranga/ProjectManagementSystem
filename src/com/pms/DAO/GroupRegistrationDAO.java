@@ -22,7 +22,6 @@ public class GroupRegistrationDAO {
 			if(groups.size() == 0) {
 				return null;
 			}
-			
 		} catch (Exception e) {
             e.printStackTrace();
             session.getTransaction().rollback();

@@ -4,15 +4,19 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 import org.apache.struts2.interceptor.SessionAware;
 import org.apache.struts2.interceptor.ServletRequestAware;
+
 import com.opensymphony.xwork2.ActionSupport;
 import com.pms.model.Group;
 import com.pms.model.Member;
 import com.pms.model.User;
 import com.pms.DAO.GroupRegistrationDAO;
+import com.pms.DAO.LectureInchargeDAO;
 import com.pms.DAO.UserDAO;
 import com.pms.model.Login;
 
@@ -24,6 +28,7 @@ public class GroupRegistrationAction extends ActionSupport implements SessionAwa
 	private Group groups;
 	private List<Group> members;
 	private List<User> users;
+	private List<Group> registeredGroups;
 	private GroupRegistrationDAO dao;
 	private String GroupId;
 	private String Leader;
@@ -32,16 +37,42 @@ public class GroupRegistrationAction extends ActionSupport implements SessionAwa
 	private Login login;
 	private Map<String, Object> sessionMap;
 	private List<String> userIds;
+	private String memberLeader;
 	private String memberOne;
 	private String memberTwo;
 	private String memberThree;
 	private String leaderName;
-	
+	private String isLectureIncharge;
 	/*
 	 *  Getters and setters
 	 */
+	
+	public String getIsLectureIncharge() {
+		return isLectureIncharge;
+	}
+
+	public void setIsLectureIncharge(String isLectureIncharge) {
+		this.isLectureIncharge = isLectureIncharge;
+	}
+	
 	public String getLeaderName() {
 		return leaderName;
+	}
+
+	public String getMemberLeader() {
+		return memberLeader;
+	}
+
+	public void setMemberLeader(String memberLeader) {
+		this.memberLeader = memberLeader;
+	}
+
+	public List<Group> getRegisteredGroups() {
+		return registeredGroups;
+	}
+
+	public void setRegisteredGroups(List<Group> registeredGroups) {
+		this.registeredGroups = registeredGroups;
 	}
 
 	public void setLeaderName(String leaderName) {
@@ -186,23 +217,44 @@ public class GroupRegistrationAction extends ActionSupport implements SessionAwa
 		String userLoginName = currentUser.getUserName();
 		String password = currentUser.getUserPassword();
 		String userType = currentUser.getUserType();
-		if (userType.equals("admin") || userType.equals("hod") || userType.equals("lecturerIncharge")) {
-			if (password.equals(login.getUserPassword())) {
-				login.setLoginState("logged");
-				sessionMap.put("userIdNo", login.getUserName());
-				sessionMap.put("loggedUser", userLoginName);
-				System.out.print(sessionMap.get("userIdNo"));
-				return userType;
+		boolean isLectureIncharge = currentUser.getIsLecturerInCharge();
+		if (userType.equals("admin") || userType.equals("hod") || userType.equals("lecturer")) {
+			System.out.println("The current userType is "+userType);
+			if (isLectureIncharge) {
+				if (password.equals(login.getUserPassword())) {
+					login.setLoginState("logged");
+					sessionMap.put("userIdNo", login.getUserName());
+					sessionMap.put("loggedUser", userLoginName);
+					sessionMap.put("isLectureIncharge", "true");
+					this.setIsLectureIncharge("true");
+					LectureInchargeDAO lectureIncharge = new LectureInchargeDAO();
+					registeredGroups = lectureIncharge.getAllRegisteredGroups();
+					return "lectureIncharge";
+				} else {
+					login.setLoginState("errorLogin");
+					addActionError("invalid login");
+					return "fail";
+				}
 			} else {
-				login.setLoginState("errorLogin");
-				addActionError("invalid login");
-				return "fail";
+				if (password.equals(login.getUserPassword())) {
+					login.setLoginState("logged");
+					sessionMap.put("userIdNo", login.getUserName());
+					sessionMap.put("loggedUser", userLoginName);
+					sessionMap.put("isLectureIncharge", "false");
+					System.out.print(sessionMap.get("userIdNo"));
+					return userType;
+				} else {
+					login.setLoginState("errorLogin");
+					addActionError("invalid login");
+					return "fail";
+				}
 			}
 		} else {
 			if (password.equals(login.getUserPassword())) {
 				login.setLoginState("logged");
 				sessionMap.put("userIdNo", login.getUserName());
 				sessionMap.put("loggedUser", userLoginName);
+				sessionMap.put("isLectureIncharge", "false");
 				System.out.print((String)sessionMap.get("userIdNo"));
 				groups = dao.getRegisteredGroups(login.getUserName());
 				if (groups != null) {
@@ -244,6 +296,11 @@ public class GroupRegistrationAction extends ActionSupport implements SessionAwa
 	 * use to get registered members id with given group id
 	 */
 	public String getMembersId() {
+		this.setIsLectureIncharge("false");
+		String isLectureIncharger = (String)sessionMap.get("isLectureIncharge");
+		if (isLectureIncharger.equals("true")) {
+			this.setIsLectureIncharge("true");
+		}
 		UserDAO dao = new UserDAO();
 		userIds = new ArrayList<String>();
 		users = dao.getStudentUsersId("student");
@@ -271,23 +328,45 @@ public class GroupRegistrationAction extends ActionSupport implements SessionAwa
 		String count = dao.getCountOfRegisteredGroups();
 		Integer idGenerate = Integer.parseInt(count) + 1;
 		group.setGroupId(idGenerate.toString());
-		group.setLeaderId((String)sessionMap.get("userIdNo"));
-		group.setMemberId((String)sessionMap.get("userIdNo"));
-		result = this.saveGroup(group);
 		
-		group.setLeaderId((String)sessionMap.get("userIdNo"));
-		group.setMemberId(this.memberOne);
-		result = this.saveGroup(group);
-		
-		group.setLeaderId((String)sessionMap.get("userIdNo"));
-		group.setMemberId(this.memberTwo);
-		result = this.saveGroup(group);
-		
-		group.setLeaderId((String)sessionMap.get("userIdNo"));
-		group.setMemberId(this.memberThree);
-		result = this.saveGroup(group);
-		
+		if (sessionMap.get("isLectureIncharge").equals("true")) {
+			group.setLeaderId(this.memberLeader);
+			group.setMemberId(this.memberLeader);
+			result = this.saveGroup(group);
+			
+			group.setLeaderId(this.memberLeader);
+			group.setMemberId(this.memberOne);
+			result = this.saveGroup(group);
+			
+			group.setLeaderId(this.memberLeader);
+			group.setMemberId(this.memberTwo);
+			result = this.saveGroup(group);
+			
+			group.setLeaderId(this.memberLeader);
+			group.setMemberId(this.memberThree);
+			result = this.saveGroup(group);
+		} else {
+			group.setLeaderId((String)sessionMap.get("userIdNo"));
+			group.setMemberId((String)sessionMap.get("userIdNo"));
+			result = this.saveGroup(group);
+			
+			group.setLeaderId((String)sessionMap.get("userIdNo"));
+			group.setMemberId(this.memberOne);
+			result = this.saveGroup(group);
+			
+			group.setLeaderId((String)sessionMap.get("userIdNo"));
+			group.setMemberId(this.memberTwo);
+			result = this.saveGroup(group);
+			
+			group.setLeaderId((String)sessionMap.get("userIdNo"));
+			group.setMemberId(this.memberThree);
+			result = this.saveGroup(group);
+		}
 		if(result.equals("success")) {
+			if(sessionMap.get("isLectureIncharge").equals("true")) {
+				this.getAllRegisteredGroups();
+				return "isLectureIncharge";
+			}
 			this.loadGroups();
 			return "success";
 		}
@@ -301,6 +380,12 @@ public class GroupRegistrationAction extends ActionSupport implements SessionAwa
 		boolean result = false;
 		GroupRegistrationDAO dao = new GroupRegistrationDAO();
 		result = dao.addMemberToGroup(group);
+		return "success";
+	}
+	
+	public String getAllRegisteredGroups() {
+		LectureInchargeDAO dao = new LectureInchargeDAO();
+		registeredGroups = dao.getAllRegisteredGroups();
 		return "success";
 	}
 	/*

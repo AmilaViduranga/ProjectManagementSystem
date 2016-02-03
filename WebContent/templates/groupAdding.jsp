@@ -13,17 +13,30 @@
 			</div>
 		</div>
 		<div class="modal-body">
-			<div class="form-group">
-				<label class="col-xs-3 control-label">Token Number</label>
-				<div class="col-xs-9">
-					<input type="text" class="form-control" placeholder="Your group Token">
+			<s:if test="%{isLectureIncharge == 'true'}">
+			
+			</s:if>
+			<s:else>
+				<div class="form-group">
+					<label class="col-xs-3 control-label">Token Number</label>
+					<div class="col-xs-9">
+						<input type="text" class="form-control" placeholder="Your group Token">
+					</div>
 				</div>
-			</div>
+			</s:else>
 			<div class="panel panel-default">
   				<div class="panel-heading clearfix">
    		 			<h3 class="panel-title pull-left">Members</h3>
    		 		</div>
    		 		<div class="panel-body">
+   		 			<s:if test="%{isLectureIncharge == 'true'}">
+   		 				<div class="form-group">
+					        <label class="col-xs-3 control-label">Leader</label>
+					        <div class="col-xs-9">
+						          <s:select cssClass="form-control" list="userIds" name="memberLeader"></s:select>
+					        </div>
+				    	</div>
+   		 			</s:if>
 					<div class="form-group">
 				        <label class="col-xs-3 control-label">Member One</label>
 				        <div class="col-xs-9">

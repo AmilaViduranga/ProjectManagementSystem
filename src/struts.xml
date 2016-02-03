@@ -38,7 +38,7 @@
 			<result name="success">/GroupList.jsp</result>
 			<result name="hod">/templates/hod/hodHome.jsp</result>
 			<result name="admin">/templates/admin/adminHome.jsp</result>
-			<result name="lecturerIncharge">/templates/lecturerIncharge/lecturerInchargeHome.jsp</result>
+			<result name="lectureIncharge">/templates/lecturerIncharge/lecturerInchargeHome.jsp</result>
 			<result name="fail">/index.jsp</result>
 		</action>
 		
@@ -72,6 +72,7 @@
 		
 		<action name="saveGroup" class="com.pms.Action.GroupRegistrationAction" method="addGroup">
 		    <result name="success">/GroupList.jsp</result>
+		    <result name="isLectureIncharge">/templates/lecturerIncharge/lecturerInchargeHome.jsp</result>
 		</action>
 		
 		<action name="addcontact" class="com.pms.Action.ContactInfoAction" method="add">
@@ -89,6 +90,14 @@
 		<action name="getLecturers" class="com.pms.Action.HodAction" method="getAllLecturers">
 			<result name="success">/templates/SepLecturerAssigning.jsp</result>
 			<result name="fail">/templates/SepLecturerAssigning.jsp</result>    
+		</action>
+		
+		<action name="getAllGroups" class="com.pms.Action.GroupRegistrationAction" method="getAllRegisteredGroups">
+		    <result name="success">/templates/lecturerIncharge/lecturerInchargeHome.jsp</result>
+		</action>
+		
+		<action name="addProject" class="com.pms.Action.ProjectAction" method="add_Project">
+			<result name="success">/project_add.jsp</result>
 		</action>
 	</package>
 </struts>
