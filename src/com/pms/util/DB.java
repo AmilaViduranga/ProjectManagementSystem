@@ -6,9 +6,13 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class DB {
-// Genaric method for calling session factory
+	/**
+	 * This class includes Genaric method for all basic functions
+	 * @author pasindu lakmal
+	 */
+
 	public static SessionFactory sf = buildSessionFactory();
-	
+
 	public static SessionFactory buildSessionFactory() {
 		return new Configuration().configure().buildSessionFactory();
 	}
@@ -17,6 +21,13 @@ public class DB {
 		return sf;
 	}
 
+	/**
+	 * This method save any object
+	 * 
+	 * @param obj Object
+	 * 
+	 * @return void
+	 */
 	public static void save(Object obj) {
 		SessionFactory sf = getSessionFactory();
 		Session session = sf.openSession();
@@ -32,6 +43,14 @@ public class DB {
 		}
 	}
 
+	/**
+	 * This method delete any object
+	 * 
+	 * @param obj Object
+	 * 
+	 * @return void
+	 */
+
 	public static void delete(Object obj) {
 		SessionFactory sf = getSessionFactory();
 		Session session = sf.openSession();
@@ -46,6 +65,13 @@ public class DB {
 		}
 	}
 
+	/**
+	 * This method upload any object
+	 * 
+	 * @param obj Object
+	 * 
+	 * @return void
+	 */
 	public static void update(Object obj) {
 		SessionFactory sf = getSessionFactory();
 		Session session = sf.openSession();
@@ -59,6 +85,14 @@ public class DB {
 			}
 		}
 	}
+
+	/**
+	 * This method update list of objects
+	 * 
+	 * @param cls class
+	 * 
+	 * @return List
+	 */
 
 	public static List list(Class cls) {
 		Session session = getSessionFactory().openSession();

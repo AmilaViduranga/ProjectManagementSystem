@@ -3,7 +3,7 @@
 <%@taglib prefix="s" uri="/struts-tags"%>
 
 <form class="form-horizontal" action="saveLecturerInCharge.action" method="post">
-	this is sep lec incharge
+	<!-- this is sep lec incharge  -->
 	<div class="panel panel-default">
 		<div class="panel-heading clearfix">
 			<i class="fa fa-users pull-left"></i>

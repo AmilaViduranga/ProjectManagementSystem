@@ -18,7 +18,7 @@
 	            	<i class="fa fa-phone-square"></i>
 	            	Contact Us
             	</h1>
-                <s:form name="contactus" cssClass="form-horizontal" action="addcontact" method="post" onsubmit="return checkForm(this);">
+                <form name="contactus" Class="form-horizontal" action="addcontact" method="post" onsubmit="return checkForm(this);">
                     <div class="col-sm-8">
                         <div class="panel panel-default">
                             <div class="panel-heading clearfix">
@@ -31,6 +31,10 @@
                                             <i class="fa fa-share-square"></i>
                                             Submit
                                     </button>
+                                    <a class="btn btn-success" href="index.jsp">
+								    	<i class="fa fa-chevron-circle-left"></i>
+								    	Go Back
+								    </a>
                                 </div>
                                 
                             </div>
@@ -38,31 +42,31 @@
 	    					<div class="form-group">
 	        					<label class="col-xs-3 control-label">Name</label>
 	        					<div class="col-xs-9">
-	          						<input type="text" Class="form-control" name="contactInfo.userName" placeholder="your Name" required>
+	          						<input type="text" Class="form-control" name="ContactInfo.userName" placeholder="your Name" required>
 	        					</div>
 	      					</div>
 	      					<div class="form-group">
 	        					<label class="col-xs-3 control-label">User Reg No</label>
 	        					<div class="col-xs-9">
-	          						<input type="text" Class="form-control" name="contactInfo.userRegNo"  placeholder="your Student Reg No" required >
+	          						<input type="text" Class="form-control" name="ContactInfo.userRegNo"  placeholder="your Student Reg No" required >
 	        					</div>
 	      					</div>
 	      					<div class="form-group">
 	        					<label class="col-xs-3 control-label">Email</label>
 	        					<div class="col-xs-9">
-	          						<input type="text" Class="form-control" name="contactInfo.userEmail" placeholder="your Email" required >
+	          						<input type="text" Class="form-control" name="ContactInfo.userEmail" placeholder="your Email" required >
 	        					</div>
 	      					</div>
 	      					<div class="form-group">
 	        					<label class="col-xs-3 control-label">Subject</label>
 	        					<div class="col-xs-9">
-	          						<input type="text" Class="form-control" name="contactInfo.userInquirySubject" placeholder="your Subject regarding Message/Inquiry" required>
+	          						<input type="text" Class="form-control" name="ContactInfo.userInquirySubject" placeholder="your Subject regarding Message/Inquiry" required>
 	        					</div>
 	      					</div>
 	      					<div class="form-group">
 	        					<label class="col-xs-3 control-label">Message / Inquiry</label>
 	        					<div class="col-xs-9">
-	          						<textarea rows="9" cols="10"  Class="form-control" name="contactInfo.userMessage" placeholder="your Message / Inquiry" required ></textarea>
+	          						<textarea rows="9" cols="10"  Class="form-control" name="ContactInfo.userMessage" placeholder="your Message / Inquiry" required ></textarea>
                					</div>
                              </div>
                         </div>
@@ -93,7 +97,7 @@
                         </div>
                     </div>
                      
-                 </s:form>
+                 </form>
 			</div>
 			<div class="col-sm-1"></div>
 		</div>

@@ -36,13 +36,10 @@ public class ContactInfoAction extends ActionSupport {
 		try {
 			ContactDAO dao = new ContactDAO();
 			result = dao.addContact(contactInfo);
-			if (result) {
-				return "success";
-			}
+			return "succcess";
 		} catch (Exception e) {
 			return ERROR;
 		}
-		return "notSuccess";
 	}
 	
 	

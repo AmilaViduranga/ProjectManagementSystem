@@ -6,7 +6,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<jsp:include page="../../includes/cssAndJsCalling.jsp"></jsp:include>
-		<jsp:include page="../../includes/headerLectureIncharge.jsp"></jsp:include>
+		<jsp:include page="../../includes/header.jsp"></jsp:include>
 		<title>Lecture incharge home</title>
 	</head>
 	<body style="margin-top: 80px;">
@@ -78,5 +78,12 @@
 		$('#content').load(page);
 		return false;
 	});	
+	$(function() {
+	    $('#selector').pagination({
+	        items: 10,
+	        itemsOnPage: 4,
+	        cssStyle: 'dark-theme'
+	    });
+	});
 	</script>
 </html>

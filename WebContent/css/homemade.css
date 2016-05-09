@@ -1,12 +1,4 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : Dec 16, 2015, 12:51:47 PM
-    Author     : User
-*/
+@CHARSET "ISO-8859-1";
 .bgimg {
     background-image: url('../images/light-blue-background-1.jpg');
     background-repeat: no-repeat;
@@ -42,8 +34,6 @@ and open the template in the editor.
 }
  
 .tab-section {
-    
-    padding: 10px;
     border: 2px solid #817bfc;
 }
  

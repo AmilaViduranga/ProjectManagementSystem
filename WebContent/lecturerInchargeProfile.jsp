@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<jsp:include page="includes/cssAndJsCalling.jsp"></jsp:include>
-		<jsp:include page="includes/headerLectureIncharge.jsp"></jsp:include>
+		<jsp:include page="includes/header.jsp"></jsp:include>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>user Profile</title>
 	</head>

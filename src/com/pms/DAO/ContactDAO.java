@@ -9,6 +9,7 @@ public class ContactDAO {
 		Session session = DbConnectionManager.getSessionFactory().openSession();
 		session.beginTransaction();
 		session.save(contact);
+		session.getTransaction().commit();
 		return true;
 	}
 }
