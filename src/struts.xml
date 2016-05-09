@@ -6,25 +6,35 @@
 		<action name="list" class="com.pms.Action.UserAction">
 			<result name="success">/user_view.jsp</result>
 		</action>
-		
+
 		<action name="add" class="com.pms.Action.UserAction" method="add">
+
+			<!-- SMTP configuration -->
+			<param name="host">smtp.gmail.com</param>
+			<param name="port">587</param>
+			<param name="userName">pasindulakmal1012@gmail.com</param>
+			<param name="password">lion@1234</param>
+			<!-- End of SMTP configuration -->
+
+
 			<result name="success">/index.jsp</result>
 			<result name="fail">/user_add.jsp</result>
 			<result name="input">/user_add.jsp</result>
-				<interceptor-ref name="fileUpload">
-					<param name="allowedTypes">image/png,image/gif,image/jpeg,image/pjpeg
-					</param>
-					<param name="maximumSize">20024000</param>
-				</interceptor-ref>
-				<interceptor-ref name="params">
-					<param name="excludeParams">dojo\..*,^struts\..*</param>
-				</interceptor-ref>
+			<interceptor-ref name="fileUpload">
+				<param name="allowedTypes">image/png,image/gif,image/jpeg,image/pjpeg
+				</param>
+				<param name="maximumSize">20024000</param>
+			</interceptor-ref>
+			<interceptor-ref name="params">
+				<param name="excludeParams">dojo\..*,^struts\..*</param>
+			</interceptor-ref>
 		</action>
-		
-		<action name="addStaff" class="com.pms.Action.UserAction" method="addStaff">
-		<result name="success">/index.jsp</result>
-		<result name="fail">/staff_add.jsp</result>
-		<result name="input">/staff_add.jsp</result>
+
+		<action name="addStaff" class="com.pms.Action.UserAction"
+			method="addStaff">
+			<result name="success">/index.jsp</result>
+			<result name="fail">/staff_add.jsp</result>
+			<result name="input">/staff_add.jsp</result>
 			<interceptor-ref name="fileUpload">
 				<param name="allowedTypes">image/png,image/gif,image/jpeg,image/pjpeg</param>
 				<param name="maximumSize">20024000</param>
@@ -37,67 +47,239 @@
 		<action name="login" class="com.pms.Action.GroupRegistrationAction">
 			<result name="success">/GroupList.jsp</result>
 			<result name="hod">/templates/hod/hodHome.jsp</result>
-			<result name="admin">/templates/admin/adminHome.jsp</result>
-			<result name="lectureIncharge">/templates/lecturerIncharge/lecturerInchargeHome.jsp</result>
+			<result name="admin" type="chain">adminUserPanelLoadUsers</result>
+			<result name="lectureIncharge">/templates/lecturerIncharge/lecturerInchargeHome.jsp
+			</result>
+			<result name="lecturer">/project_add.jsp</result>
 			<result name="fail">/index.jsp</result>
 		</action>
-		
-		<action name="groupPage" class="com.pms.Action.GroupRegistrationAction" method="loadGroups">
+
+		<action name="groupPage" class="com.pms.Action.GroupRegistrationAction"
+			method="loadGroups">
 			<result name="success">/GroupList.jsp</result>
 			<result name="fail">/index.jsp</result>
 		</action>
-		
+
 
 		<action name="showGroup" class="com.pms.Action.GroupRegistrationAction">
-		    <result name="success">/GroupList.jsp</result>
-		</action> 
-		
-		<action name="getGroupIndividual" class="com.pms.Action.GroupRegistrationAction" method="getListMembers">
+			<result name="success">/GroupList.jsp</result>
+		</action>
+
+		<action name="getGroupIndividual" class="com.pms.Action.GroupRegistrationAction"
+			method="getListMembers">
 			<result name="success">/templates/groupIndividual.jsp</result>
-			<result name="fail">/lecturerSignUp.jsp</result>    
+			<result name="fail">/lecturerSignUp.jsp</result>
 		</action>
 		
-		<action name="authonticateLecturer" class="com.pms.Action.LoginAction" method="authonticateLecturer">
-		    <result name="success">/staff_add.jsp</result>
-		    <result name="fail">/lecturerSignUp.jsp</result>
+		<!-- new added -->
+		<action name="getGroupIndividualLecInCharge" class="com.pms.Action.GroupRegistrationAction"
+			method="getListMembers">
+			<result name="success">/templates/groupIndividualLecInCharge.jsp</result>
+			<result name="fail">/lecturerSignUp.jsp</result>
 		</action>
-		
-		<action name="getUser" class="com.pms.Action.UserAction" method="getUserIndividual">
+
+		<action name="authonticateLecturer" class="com.pms.Action.LoginAction"
+			method="authonticateLecturer">
+			<result name="success">/staff_add.jsp</result>
+			<result name="fail">/lecturerSignUp.jsp</result>
+		</action>
+
+		<action name="getUser" class="com.pms.Action.UserAction"
+			method="getUserIndividual">
 			<result name="success">/templates/viewUserProfile.jsp</result>
 		</action>
-		
-		<action name="getStudentIds" class="com.pms.Action.GroupRegistrationAction" method="getMembersId">
-		    <result name="success">/templates/groupAdding.jsp</result>
+
+		<action name="getStudentIds" class="com.pms.Action.GroupRegistrationAction"
+			method="getMembersId">
+			<result name="success">/templates/groupAdding.jsp</result>
 		</action>
-		
-		<action name="saveGroup" class="com.pms.Action.GroupRegistrationAction" method="addGroup">
-		    <result name="success">/GroupList.jsp</result>
-		    <result name="isLectureIncharge">/templates/lecturerIncharge/lecturerInchargeHome.jsp</result>
+
+		<action name="saveGroup" class="com.pms.Action.GroupRegistrationAction"
+			method="addGroup">
+			<result name="success">/GroupList.jsp</result>
+			<result name="isLectureIncharge">/templates/lecturerIncharge/lecturerInchargeHome.jsp
+			</result>
 		</action>
-		
-		<action name="addcontact" class="com.pms.Action.ContactInfoAction" method="add">
-			<result name="success">/contactUs_add.jsp</result>
-		</action>
-		
-		<action name="selectLecturerInCharge" class="com.pms.Action.HodAction" method="getLecturesByNames">
+
+
+
+		<action name="selectLecturerInCharge" class="com.pms.Action.HodAction"
+			method="getLecturesByNames">
 			<result name="success">/templates/SepLectuerInChargeSelect.jsp</result>
 		</action>
-			
-		<action name="saveLecturerInCharge" class="com.pms.Action.HodAction" method="saveLectureInCharge">
+
+		<action name="saveLecturerInCharge" class="com.pms.Action.HodAction"
+			method="saveLectureInCharge">
 			<result name="success">/templates/hod/hodHome.jsp</result>
 		</action>
-		
-		<action name="getLecturers" class="com.pms.Action.HodAction" method="getAllLecturers">
+
+		<action name="getLecturers" class="com.pms.Action.HodAction"
+			method="getAllLecturers">
 			<result name="success">/templates/SepLecturerAssigning.jsp</result>
-			<result name="fail">/templates/SepLecturerAssigning.jsp</result>    
+			<result name="fail">/templates/SepLecturerAssigning.jsp</result>
 		</action>
-		
-		<action name="getAllGroups" class="com.pms.Action.GroupRegistrationAction" method="getAllRegisteredGroups">
-		    <result name="success">/templates/lecturerIncharge/lecturerInchargeHome.jsp</result>
+
+		<action name="getAllGroups" class="com.pms.Action.GroupRegistrationAction"
+			method="getAllRegisteredGroups">
+			<result name="success">/templates/lecturerIncharge/lecturerInchargeHome.jsp
+			</result>
 		</action>
-		
-		<action name="addProject" class="com.pms.Action.ProjectAction" method="add_Project">
+
+		<action name="addProject" class="com.pms.Action.ProjectAction"
+			method="add_Project">
+			<result name="success">/templates/lecturer/projectAdd.jsp</result>
+		</action>
+
+		<action name="getProjectIndividual" class="com.pms.Action.ProjectAction"
+			method="getProjectIndividually">
+			<result name="success">/templates/lecturer/projectIndividually.jsp
+			</result>
+		</action>
+
+		<action name="loadProjectMenu" class="com.pms.Action.GroupRegistrationAction"
+			method="getAllProjects">
 			<result name="success">/project_add.jsp</result>
 		</action>
+
+		<action name="loadAllProjectToLI" class="com.pms.Action.LectureInchargeAction"
+			method="getAllProjectsToLoad">
+			<result name="success">/lecturerInchargeProjects.jsp</result>
+		</action>
+
+		<action name="fielterProject" class="com.pms.Action.LectureInchargeAction"
+			method="filterProject">
+			<result name="success">/lecturerInchargeProjects.jsp</result>
+		</action>
+
+		<action name="changeState" class="com.pms.Action.LectureInchargeAction"
+			method="changeProjectState">
+			<result name="success">/lecturerInchargeProjects.jsp</result>
+		</action>
+        
+        <action name="logOut" class="com.pms.Action.GroupRegistrationAction" method="logOut">
+		    <result name="success">/index.jsp</result>
+		</action>
+		
+		<action name="forgetPassword" class="com.pms.Action.GroupRegistrationAction" method="forgetPassword">
+		    <result name="success">/ForgetPassword.jsp</result>
+		</action>
+		
+		<action name="getAllAcceptedProjects" class="com.pms.Action.ProjectAction" method="getAcceptedProject">
+		    <result name="success">/StudentProjectSelecting.jsp</result>
+		</action>
+		
+		<action name="updateAssignment" class="com.pms.Action.ProjectAction" method="updateProjectAssignment">
+		    <result name="success">/StudentProjectSelecting.jsp</result>
+		</action>
+
+		<action name="loadSelectedProjectToLI" class="com.pms.Action.LectureInchargeAction"
+			method="getStudentSelectedProjects">
+			<result name="success">/lecturerInchargeProjectAssign.jsp</result>
+		</action>
+
+		<!-- This action for sending email -->
+		<action name="doSendEmail" class="com.pms.Action.SendEmailAction"
+			method="sendEmail">
+
+			<!-- SMTP configuration -->
+			<param name="host">smtp.gmail.com</param>
+			<param name="port">587</param>
+			<param name="userName">pasindulakmal1012@gmail.com</param>
+			<param name="password">lion@1234</param>
+			<!-- End of SMTP configuration -->
+
+			<interceptor-ref name="fileUpload">
+				<param name="allowedTypes">*/*</param> <!-- all file types -->
+				<param name="maximumSize">4194304</param> <!-- 4 MB -->
+			</interceptor-ref>
+
+			<interceptor-ref name="staticParams" />
+			<interceptor-ref name="params" />
+			<interceptor-ref name="validation" />
+			<interceptor-ref name="workflow" />
+			<interceptor-ref name="exception" />
+
+			<result name="success" type="redirect">/index.jsp</result>
+			<result name="input">/EmailForm.jsp</result>
+		</action>
+
+		<action name="updateProfile" class="com.pms.Action.UserAction"
+			method="updateUserProfile">
+			<result name="success">/userProfile.jsp</result>
+			<result name="fail">/userProfile.jsp</result>
+			<interceptor-ref name="fileUpload">
+				<param name="allowedTypes">image/png,image/gif,image/jpeg,image/pjpeg</param>
+				<param name="maximumSize">20024000</param>
+			</interceptor-ref>
+			<interceptor-ref name="params">
+				<param name="excludeParams">dojo\..*,^struts\..*</param>
+			</interceptor-ref>
+		</action>
+
+		<action name="addCv" class="com.pms.Action.UserAction" method="insertCv">
+
+			<interceptor-ref name="fileUpload">
+				<param name="allowedTypes">*/*</param> <!-- all file types -->
+				<param name="maximumSize">4194304</param> <!-- 4 MB -->
+			</interceptor-ref>
+
+			<interceptor-ref name="staticParams" />
+			<interceptor-ref name="params" />
+			<interceptor-ref name="validation" />
+			<interceptor-ref name="workflow" />
+			<interceptor-ref name="exception" />
+
+			<result name="success">/cv.jsp</result>
+			<result name="input">/cv.jsp</result>
+		</action>
+
+
+		<action name="trueAction" class="com.pms.Action.UserAction"
+			method="passwordValidate">
+			<result name="success">/user_add.jsp</result>
+		</action>
+
+		<action name="viewCvAction" class="com.pms.Action.CvAction"
+			method="loadStudent">
+			<result name="success">/cvView.jsp</result>
+		</action>
+
+		<action name="downloadFile" class="com.pms.Action.CvAction"
+			method="downloadCv">
+			<result name="success" type="stream">
+				<param name="contentType">application/octet-stream</param>
+				<param name="inputName">inputStream</param>
+				<param name="contentDisposition">attachment;filename="${fileName}"</param>
+				<param name="bufferSize">4096</param>
+			</result>
+		</action>
+
+
+		<action name="acceptProjectForGroup" class="com.pms.Action.GroupRegistrationAction"
+			method="acceptProjectForSelectedGroup">
+			<result name="success">/lecturerInchargeProjects.jsp</result>
+			<result name="input"></result>
+		</action>
+
+		<action name="adminUserPanelLoadUsers" class="com.pms.Action.AdminAction" method="getAllUsers">
+		    <result name="success">/adminUser.jsp</result>
+		</action>
+		<action name="searchUserAdmin" class="com.pms.Action.AdminAction" method="searchUser">
+		    <result name="success">/adminUser.jsp</result>
+		</action>
+		<action name="searchUserIndividualAdmin" class="com.pms.Action.AdminAction" method="getUserIndividually">
+		    <result name="success">/adminPanel/userIndividual.jsp</result>
+		</action>
+		<action name="deleteExcistingUser" class="com.pms.Action.AdminAction" method="deleteUser">
+		    <result name="success" type="chain">adminUserPanelLoadUsers</result>
+		</action>
+		<action name="updateUser" class="com.pms.Action.AdminAction" method="updateUser">
+		    <result name="success" type="chain">adminUserPanelLoadUsers</result>
+		</action>
+		<action name="loadEnrolmentKeys" class="com.pms.Action.AdminAction" method="getAllEnrolmentKeys">
+		    <result name="success">/adminEnrolment.jsp</result>
+		</action>
+
+
 	</package>
 </struts>

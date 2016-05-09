@@ -21,7 +21,8 @@
 		        	<h4 class="list-group-item-heading"><s:property value="individualUser.userEmail"/></h4>
 		      </div>
 		      <div class="panel panel-default bootcards-media">
-			  	<img src="http://www.teamstudio.com/Portals/218295/images/istock_000001242290small.jpg" class="img-responsive" style="height:350px; width:350px;"/>
+			  	<!-- <img src="http://www.teamstudio.com/Portals/218295/images/istock_000001242290small.jpg" class="img-responsive" style="height:350px; width:350px;"/-->
+			  	<img src="uploads/<s:property value="individualUser.photoFileName"/>" class="img-responsive" style="height:350px; width:350px;"/>
 			  </div>
 		  </div>
 	

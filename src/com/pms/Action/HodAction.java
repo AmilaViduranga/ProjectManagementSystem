@@ -15,12 +15,13 @@ import com.pms.util.DB;
 public class HodAction extends ActionSupport implements SessionAware {
 
 	/**
-	 * 
+	 * This class is use for handle actions doing by HOD
 	 */
-	private static final long serialVersionUID = 1L;
-	/*
+
+	/**
 	 * Object Declaration
 	 */
+	private static final long serialVersionUID = 1L;
 	private List<User> groups;
 	private List<User> lecturers;
 	private String userName;
@@ -29,17 +30,22 @@ public class HodAction extends ActionSupport implements SessionAware {
 	private String selectedName;
 	private User selectedLectureInCharge;
 	private User previousLectureInCharge;
+	private List licState;
 
-	/*
-	 * Method Declaration
-	 */
-
-	/*
+	/**
 	 * Getters and Setters
 	 */
 
 	public List<User> getGroups() {
 		return groups;
+	}
+
+	public List getLicState() {
+		return licState;
+	}
+
+	public void setLicState(List licState) {
+		this.licState = licState;
 	}
 
 	public User getPreviousLectureInCharge() {
@@ -102,18 +108,43 @@ public class HodAction extends ActionSupport implements SessionAware {
 		this.lecturers = lecturers;
 	}
 
+	/**
+	 * This method is use for get all lectures
+	 * 
+	 * @see lectuerers object with currernt lectures
+	 * @return success
+	 */
 	public String getAllLecturers() {
-
-		System.out.println("call HOD Action  now");
+		/*
+		 * creating object from HodAdo class
+		 */
 		HodDAO dao = new HodDAO();
+		/*
+		 * get all lectures using type
+		 */
 		lecturers = dao.getLectursByType();
 		System.out.println(lecturers);
 		return "success";
 	}
 
+	/**
+	 * This method is use for get all lectures by their name
+	 * 
+	 * @see lectuer in charge
+	 * @return success
+	 */
 	public String getLecturesByNames() {
+		/*
+		 * creating object from HodDAO class
+		 */
 		HodDAO dao = new HodDAO();
+		/*
+		 * get all lectures using type
+		 */
 		lecturers = dao.getLectursByType();
+		/*
+		 * get all lectures names
+		 */
 		lecturesNames = new ArrayList<String>();
 		for (int i = 0; i < lecturers.size(); i++) {
 			User user = new User();
@@ -124,17 +155,36 @@ public class HodAction extends ActionSupport implements SessionAware {
 		return "success";
 	}
 
+	/**
+	 * This method is use for save lecture in charge
+	 * 
+	 * @see lectuerers names
+	 * @return success
+	 */
+
 	public String saveLectureInCharge() {
-
-		System.out.println("---this is save lecture in charge-----");
-		System.out.println(">>>" + selectedName);
-
+		/*
+		 * creating object from HodDAO class
+		 */
 		HodDAO dao = new HodDAO();
-		previousLectureInCharge = dao.getPreviousLecInCharge();
-		System.out.println(">>>previousLectureInCharge"
-				+ previousLectureInCharge);
-		previousLectureInCharge.setIsLecturerInCharge(false);
-		DB.update(previousLectureInCharge);
+		/*
+		 * check lecture in charge state is empty in initially in the first
+		 * appointment of lecture in charge
+		 */
+		licState = dao.getStateOfLic();
+		/*
+		 * remove previous lecture in charge
+		 */
+		if (!licState.isEmpty()) {
+			previousLectureInCharge = dao.getPreviousLecInCharge();
+			System.out.println(">>>previousLectureInCharge"
+					+ previousLectureInCharge);
+			previousLectureInCharge.setIsLecturerInCharge(false);
+			DB.update(previousLectureInCharge);
+		}
+		/*
+		 * set new lecture in charge
+		 */
 		selectedLectureInCharge = dao.getUserByName(selectedName);
 		System.out.println(">>>selectedLectureInCharge"
 				+ selectedLectureInCharge);
@@ -144,10 +194,13 @@ public class HodAction extends ActionSupport implements SessionAware {
 		return "success";
 	}
 
-	/*
-	 * Get Current Session
+	/**
+	 * This method come up with framework it will inject a map of session
+	 * attributes via the method.
+	 * 
+	 * @param Map<String,Object> Map for String and User object 
+	 * @see use this map to add/remove attributes to/from the session.
 	 */
-
 	@Override
 	public void setSession(Map<String, Object> arg0) {
 

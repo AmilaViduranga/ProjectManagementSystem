@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -41,6 +42,11 @@ public class User {
 
 	@Transient
 	private String confirmPassword;
+	
+	@Transient
+	private String profilePassword;
+
+	
 
 	@Column(name = "email")
 	private String userEmail;
@@ -73,6 +79,8 @@ public class User {
 	private String photoFileName;
 	private String photoContentType;
 
+	@OneToOne
+	private Cv cv;
 	
 	
 	
@@ -84,6 +92,21 @@ public class User {
 	
 	
 	
+	public String getProfilePassword() {
+		return profilePassword;
+	}
+
+	public Cv getCv() {
+		return cv;
+	}
+
+	public void setCv(Cv cv) {
+		this.cv = cv;
+	}
+
+	public void setProfilePassword(String profilePassword) {
+		this.profilePassword = profilePassword;
+	}
 	
 	public int getId() {
 		return id;

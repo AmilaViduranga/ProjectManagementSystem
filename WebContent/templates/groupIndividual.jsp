@@ -4,10 +4,6 @@
 	<div class="panel panel-default">
 	  <div class="panel-heading clearfix">
 	    <h3 class="panel-title pull-left">Group Name</h3>
-	      <a class="btn btn-primary pull-right" href="#" id="groupEdit">
-	        <i class="fa fa-pencil"></i>
-	        Edit
-	      </a>
 	    </div>
 	    <div class="list-group">
 	      <div class="list-group-item">
@@ -24,12 +20,19 @@
 					    <h3 class="panel-title pull-left">Members</h3>
 				    </div>
 				    <div class="list-group">
-				    	<s:iterator value="members" var="individualMember">
+				    	<s:iterator value="individualMembers" var="individualMember">
 					      <a class="list-group-item" href="#">
+					      	<s:if test="photoFileName == null">
 					      		<div class="col-sm-2">
 					      			<i class="fa fa-2x fa-user"></i>
 					      		</div>
-						        <h4 class="list-group-item-heading"><s:property value="memberId"/></h4>
+					      	</s:if>
+					      	<s:else>
+					      		<div class="col-sm-2">
+					      			<img src="uploads/<s:property value="photoFileName"/>" class="img-responsive" style="height:30px; width:30px;"/>
+					      		</div>
+					      	</s:else>
+						        <h4 class="list-group-item-heading"><s:property value="userIdNo"/></h4>
 					      </a>
 					    </s:iterator>
 				    </div>
@@ -44,4 +47,5 @@
 		$('#content').load('templates/groupEditing.jsp');
 		return false;
 	});
+	
 	</script>

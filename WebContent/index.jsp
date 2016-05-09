@@ -9,7 +9,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Login</title>
 	</head>
-	<body style="margin-top: 120px;">
+	<body bgcolor="#f5f5f0" style="margin-top: 120px;">
 		<div class="row">
 			<div class="col-sm-3"></div>
 			<div class="col-sm-6">
@@ -29,7 +29,7 @@
 	    					<div class="form-group">
 	        					<label class="col-xs-3 control-label">User Name</label>
 	        					<div class="col-xs-9">
-	          						<input type="text" Class="form-control" name="login.userName" placeholder="your Name" required>
+	          						<input type="text" Class="form-control" name="login.userName" placeholder="your Name" id="userName" required>
 	        					</div>
 	      					</div>
 	      					<div class="form-group">
@@ -39,6 +39,7 @@
 	        					</div>
 	      					</div>
 	  					</div>
+	  					<a href="ForgetPassword.jsp" id="forgetPass"><small class="btn btn-link pull-left">Forget Password</small></a>
 	  					<a href="lecturerSignUp.jsp"><small class="btn btn-link pull-right">Lecturer sign up</small></a>
 	  					<a href="user_add.jsp"><small class="btn btn-link pull-right">Student Sign up</small></a>
 	  					<a href="contactUs_add.jsp"><small class="btn btn-link pull-right">Contact Us</small></a>
@@ -49,8 +50,10 @@
 		</div>
 	</body>
 	<s:if test="hasActionErrors()">
-	<script type="text/javascript">
-	alertify.error("Not inserted data properly, check it now");
-	</script>
+		<script type="text/javascript">
+			alertify.error("Not inserted data properly, check it now", function() {
+				return window.location.reload();
+			});
+		</script>
 	</s:if>
 </html>

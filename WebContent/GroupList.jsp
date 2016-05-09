@@ -24,7 +24,7 @@
 					  			<i class="fa fa-1x fa fa-list pull-left"></i>
 						    	<h3 class="panel-title pull-left">Registered groups</h3>
 						    	<div class="btn-group pull-right">
-						    	<s:if test="%{GroupId == 'new'}">
+						    	<s:if test="#session.groupIdExcist == 'new'">
 	                                 <a class="btn btn-success btn-block pull-right" href="getStudentIds.action" id="registerGroup">
 	        							<i class="fa fa-plus"></i>
 	        							Register
@@ -33,7 +33,7 @@
                              </div>
 						    </div>
 					    	<div class="list-group" id="groupList">
-					    		<s:if test="%{GroupId == 'new'}">
+					    		<s:if test="#session.groupIdExcist == 'new'">
 					    			<div class="panel-body">
 								    	<p>You are not currently registered your group, so if you want to register your group
 								    	Press the registration button above and register you group by selecting other members.If

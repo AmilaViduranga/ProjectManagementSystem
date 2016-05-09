@@ -2,7 +2,6 @@
 	pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="s" uri="/struts-tags"%>
 <s:form class="form-horizontal" action="selectLecturerInCharge.action">
-this is sep lec ass
 	<div class="panel panel-default">
 		<div class="panel-heading clearfix">
 			<i class="fa fa-users pull-left"></i>
@@ -36,7 +35,8 @@ this is sep lec ass
 							<div class="row">
 								<div class="col-sm-6">
 									<div class="col-sm-2">
-										<i class="fa fa-3x fa-user pull-left"></i>
+										<!-- i class="fa fa-3x fa-user pull-left"></i-->
+											<img src="uploads/<s:property value="photoFileName"/>" class="img-responsive" style="height:40px; width:40px;"/>
 									</div>
 									<div class="col-sm-8">
 										<h4 class="list-group-item-heading">
@@ -44,7 +44,7 @@ this is sep lec ass
 										</h4>
 										<p class="list-group-item-text">
 											<s:if test="%{isLecturerInCharge}">
-												<div>Lecturer In Charge</div>
+												<div style="color:#FF0000">Lecturer In Charge</div>
 											</s:if>
 											<s:else>
 												<div>Lecturer</div>

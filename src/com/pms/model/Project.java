@@ -2,12 +2,16 @@
 
 package com.pms.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.management.loading.PrivateClassLoader;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,6 +25,7 @@ public class Project {
 	@Column(name = "project_id")
 	private int projectId;
 	
+	
 	@Column(name = "lecturer_name")
 	private String lecturerName;
 	
@@ -28,7 +33,6 @@ public class Project {
 	private String projectName;
 	
 	@Column(name = "project_description")
-	
 	private String projectDescription;
 	
 	@Column(name = "client_name")
@@ -42,9 +46,36 @@ public class Project {
 	
 	@Column(name = "project_accept_status")
 	private boolean projectAcceptStatus;
-
+	
+	@Column (name="lecture_id")
+	private String lectureID;
+	
+	@Column (name="is_Asigned")
+	private boolean isAssigned;
+	
+	
 	
 	//Getters and Setters for private attributes
+	
+	
+	
+	
+	public String getLectureID() {
+		return lectureID;
+	}
+
+	public boolean isAssigned() {
+		return isAssigned;
+	}
+
+	public void setAssigned(boolean isAssigned) {
+		this.isAssigned = isAssigned;
+	}
+
+	public void setLectureID(String lectureID) {
+		this.lectureID = lectureID;
+	}
+	
 	public int getProjectId() {
 		return projectId;
 	}

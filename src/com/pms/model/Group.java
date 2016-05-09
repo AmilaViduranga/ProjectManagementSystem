@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -20,6 +21,7 @@ public class Group {
 	@GeneratedValue
 	private int id;
 	
+	
 	@Column(name = "group_id")
 	private String groupId;
 	
@@ -29,6 +31,65 @@ public class Group {
 	@Column (name = "member_id")
 	private String memberId;
 	
+	@Column (name = "project_id")
+	private String projectId;
+	
+	@Column (name = "project_comment")
+	private String projectComment;
+	
+	@Column (name = "lecture_Incharge_status")
+	private String lectureInchargeStatus;
+	
+	@Column (name = "project_Technology")
+	private String technology;
+	
+	
+
+	// getters and setters
+	
+	
+	
+	
+	public int getId() {
+		return id;
+	}
+
+	public String getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(String projectId) {
+		this.projectId = projectId;
+	}
+
+	public String getProjectComment() {
+		return projectComment;
+	}
+
+	public void setProjectComment(String projectComment) {
+		this.projectComment = projectComment;
+	}
+
+	public String getLectureInchargeStatus() {
+		return lectureInchargeStatus;
+	}
+
+	public void setLectureInchargeStatus(String lectureInchargeStatus) {
+		this.lectureInchargeStatus = lectureInchargeStatus;
+	}
+
+	public String getTechnology() {
+		return technology;
+	}
+
+	public void setTechnology(String technology) {
+		this.technology = technology;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getMemberId() {
 		return memberId;
 	}

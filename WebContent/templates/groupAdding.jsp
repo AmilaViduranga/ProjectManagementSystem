@@ -31,11 +31,11 @@
    		 		<div class="panel-body">
    		 			<s:if test="%{isLectureIncharge == 'true'}">
    		 				<div class="form-group">
-					        <label class="col-xs-3 control-label">Leader</label>
-					        <div class="col-xs-9">
-						          <s:select cssClass="form-control" list="userIds" name="memberLeader"></s:select>
-					        </div>
-				    	</div>
+				        <label class="col-xs-3 control-label">Leader</label>
+				        <div class="col-xs-9">
+					          <s:select cssClass="form-control" list="userIds" name="memberLeader"></s:select>
+				        </div>
+				    </div>
    		 			</s:if>
 					<div class="form-group">
 				        <label class="col-xs-3 control-label">Member One</label>
